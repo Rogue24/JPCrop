@@ -7,6 +7,7 @@
 ## Example
 
 Tool class with high imitation of cutting function of little red book app.
+[Juejin Blog](https://juejin.cn/post/6910627272215150600)
 
     高仿小红书App裁剪功能的工具：
         1.集成类似小红书基本的裁剪功能；
