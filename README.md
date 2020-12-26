@@ -2,6 +2,8 @@
 
 [![Language](http://img.shields.io/badge/language-Swift-brightgreen.svg?style=flat)](https://developer.apple.com/Swift)
 
+![effect](https://github.com/Rogue24/JPCover/raw/master/JPCrop/cover.jpg)
+
 ## Example
 
 Tool class with high imitation of cutting function of little red book app.
@@ -11,6 +13,8 @@ Tool class with high imitation of cutting function of little red book app.
         2.API简单易用；
         3.切换裁剪比例时可设置带有动画过渡，不会那么生硬；
         4.可异步可同步裁剪，并且可压缩。
+        
+![example](https://github.com/Rogue24/JPCover/raw/master/JPCrop/example.gif)
 
 ## How to use
 
