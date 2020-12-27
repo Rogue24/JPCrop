@@ -32,6 +32,8 @@ Pod::Spec.new do |s|
 
   s.source_files = 'JPCrop/Classes/**/*'
   
+  s.swift_version = '5.0'
+  
   # s.resource_bundles = {
   #   'JPCrop' => ['JPCrop/Assets/*.png']
   # }
