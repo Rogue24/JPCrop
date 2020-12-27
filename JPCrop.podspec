@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+  A clipping tool that can fine tune the direction of rotation.
                        DESC
 
   s.homepage         = 'https://github.com/Rogue24/JPCrop'
