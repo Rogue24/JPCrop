@@ -27,7 +27,9 @@ Is so easy:
 import JPCrop
 
 // 2.Initialize
-let croper = Croper(frame: croperFrame, configure)
+let frame = CGRect(...
+let configure = Configure(image)
+let croper = Croper(frame: frame, configure)
 
 // 3.Add to superview, done!
 view.insertSubview(croper, at: 0)
@@ -49,7 +51,7 @@ croper.hideRotateGrid(animated: true)
 
 ### Switch the crop width to height ratio
 ```swift
-// rotateGridCount: Number of grid in rotation
+// rotateGridCount: Number of grid in rotation. (ver, hor)
 // animated: with animation or not
 croper.updateCropWHRatio(3.0 / 4.0, rotateGridCount: (6, 5), animated: true)
 ```
@@ -66,7 +68,7 @@ let configure = croper.syncConfigure()
 
 // 1.Sync crop
 let image = croper.crop() 
-cropDone?(image, configure)
+cropDone(image, configure)
 
 // 2.Async crop: crop in DispatchQueue.global, result back to DispatchQueue.main 
 croper.asyncCrop {

@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         title = "JPCrop"
         
         if let image = imageView.image {
-            configure = (Configure(image))
+            configure = Configure(image)
         }
     }
     
@@ -43,11 +43,12 @@ class ViewController: UIViewController {
             
             self.configure = configure
             
-            if image != nil {
-                UIView.transition(with: self.imageView, duration: 0.2, options: .transitionCrossDissolve, animations: {
-                    self.imageView.image = image
-                }, completion: nil)
-            }
+            UIView.transition(with: self.imageView,
+                              duration: 0.2,
+                              options: .transitionCrossDissolve,
+                              animations: {
+                self.imageView.image = image
+            }, completion: nil)
         }
         
         navCtr.pushViewController(cropVC, animated: true)

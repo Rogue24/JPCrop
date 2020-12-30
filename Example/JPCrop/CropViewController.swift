@@ -25,9 +25,7 @@ class CropViewController: UIViewController {
             return
         }
         
-        let croperFrame = CGRect(x: 0,
-                                 y: StatusBarH,
-                                 width: PortraitScreenWidth,
+        let croperFrame = CGRect(x: 0, y: StatusBarH, width: PortraitScreenWidth,
                                  height: PortraitScreenHeight - StatusBarH - DiffTabBarH - 100)
         
         let croper = Croper(frame: croperFrame, configure)
