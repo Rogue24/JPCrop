@@ -117,9 +117,22 @@ extension Croper {
     /// 刷新旋转角度（单位：弧度）
     public func updateRadian(_ radian: CGFloat) {
         self.radian = checkRadian(radian)
+        
         let factor = fitFactor()
+        
+        var zoomScale = scrollView.zoomScale
+        let minZoomScale = scrollView.minimumZoomScale
+        
+        let oldScale = scaleValue(scrollView.transform)
+        let newScale = factor.scale
+        // scrollView 变大/变小多少，zoomScale 则变小/变大多少（反向缩放）
+        // 否则在旋转过程中，裁剪区域在图片上即便有足够空间进行旋转（不超出图片区域），也会跟随 scrollView 变大变小
+        zoomScale *= oldScale / newScale
+        if zoomScale <= minZoomScale { zoomScale = minZoomScale }
+        
         scrollView.transform = factor.transform
         scrollView.contentInset = factor.contentInset
+        scrollView.zoomScale = zoomScale
     }
     
     // MARK: 切换裁剪框的宽高比

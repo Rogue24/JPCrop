@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'JPCrop'
-  s.version          = '0.1.0'
+  s.version          = '0.1.1'
   s.summary          = 'A clipping tool that can fine tune the direction of rotation.'
 
 # This description is used to generate tags and improve search results.
