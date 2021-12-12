@@ -9,17 +9,17 @@ import UIKit
 
 public class Croper: UIView {
     
-    // MARK:- 默认初始值
-    /// 裁剪宽高比的范围（默认 最小 3 : 4 ~ 2 : 1）
-    public static var cropWHRatioRange: ClosedRange<CGFloat> = (3.0 / 4.0)...2
-    /// 旋转的范围（默认 -45° ~ 45°）
-    public static var radianRange: ClosedRange = (-CGFloat.pi * 0.25)...(CGFloat.pi * 0.25)
+    // MARK: - 默认初始值
+    /// 裁剪宽高比的范围（默认 最小 `1 : 2` ~ `2 : 1`）
+    public static var cropWHRatioRange: ClosedRange<CGFloat> = (1.0 / 2.0) ... 2.0
+    /// 旋转的范围（默认 `-45°` ~ `45°`）
+    public static var radianRange: ClosedRange = (-CGFloat.pi * 0.25) ... (CGFloat.pi * 0.25)
     /// 裁剪区域的边距
     public static var margin: CGFloat = 12
     /// 动画时间
     public static var animDuration: TimeInterval = 0.25
     
-    // MARK:- 公开可设置的存储属性
+    // MARK: - 公开可设置的存储属性
     /// 裁剪图片
     public let image: UIImage
     /// 图片的宽高比（当 cropWHRatio = 0 时取该值）
@@ -45,7 +45,7 @@ public class Croper: UIView {
     /// 当设置裁剪宽高比时超出可设置范围时的回调
     public var cropWHRatioRangeOverstep: ((_ isUpper: Bool, _ bound: CGFloat) -> ())?
     
-    // MARK:- 私有的存储属性
+    // MARK: - 私有的存储属性
     var minHorMargin: CGFloat = 0
     var minVerMargin: CGFloat = 0
     
@@ -56,7 +56,7 @@ public class Croper: UIView {
     let idleGridLayer = CAShapeLayer()
     let rotateGridLayer = CAShapeLayer()
     
-    // MARK:- 构造器
+    // MARK: - 构造器
     public convenience init(frame: CGRect,
                             _ configure: Configure,
                             idleGridCount: GridCount = (3, 3),
@@ -100,7 +100,7 @@ public class Croper: UIView {
     }
 }
 
-// MARK:- API
+// MARK: - API
 extension Croper {
     
     // MARK: 获取同步的Configure（当前的裁剪元素、状态）

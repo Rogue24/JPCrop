@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		0074BEC82597818A00F0DFB3 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0074BEC72597818A00F0DFB3 /* Extension.swift */; };
 		0074BED22597848A00F0DFB3 /* CropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0074BED12597848A00F0DFB3 /* CropViewController.swift */; };
-		0074BEDC25979B9400F0DFB3 /* xiancun.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 0074BEDB25979B9400F0DFB3 /* xiancun.jpg */; };
-		0074BEEA2597B73900F0DFB3 /* ali.png in Resources */ = {isa = PBXBuildFile; fileRef = 0074BEE92597B73900F0DFB3 /* ali.png */; };
+		1A344A052765F77F00B2CD1C /* cover_ali.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1A344A042765F77F00B2CD1C /* cover_ali.jpg */; };
+		1AF18FC12711A438005A4E54 /* girl.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1AF18FC02711A438005A4E54 /* girl.jpg */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
 		607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 607FACD91AFB9204008FA782 /* Main.storyboard */; };
@@ -23,8 +23,8 @@
 		006AC6F1D42E5D0D704E2053 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; name = README.md; path = ../README.md; sourceTree = "<group>"; };
 		0074BEC72597818A00F0DFB3 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		0074BED12597848A00F0DFB3 /* CropViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropViewController.swift; sourceTree = "<group>"; };
-		0074BEDB25979B9400F0DFB3 /* xiancun.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = xiancun.jpg; sourceTree = "<group>"; };
-		0074BEE92597B73900F0DFB3 /* ali.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ali.png; sourceTree = "<group>"; };
+		1A344A042765F77F00B2CD1C /* cover_ali.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cover_ali.jpg; sourceTree = "<group>"; };
+		1AF18FC02711A438005A4E54 /* girl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = girl.jpg; sourceTree = "<group>"; };
 		279D33B6130A07E80B07C1A6 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		381748F2F2FF7D97217419B3 /* Pods-JPCrop_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JPCrop_Example.debug.xcconfig"; path = "Target Support Files/Pods-JPCrop_Example/Pods-JPCrop_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		566FA62953BAE230D90B3B66 /* Pods-JPCrop_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JPCrop_Example.release.xcconfig"; path = "Target Support Files/Pods-JPCrop_Example/Pods-JPCrop_Example.release.xcconfig"; sourceTree = "<group>"; };
@@ -89,8 +89,8 @@
 		607FACD31AFB9204008FA782 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0074BEDB25979B9400F0DFB3 /* xiancun.jpg */,
-				0074BEE92597B73900F0DFB3 /* ali.png */,
+				1AF18FC02711A438005A4E54 /* girl.jpg */,
+				1A344A042765F77F00B2CD1C /* cover_ali.jpg */,
 				607FACD41AFB9204008FA782 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -186,10 +186,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				607FACDB1AFB9204008FA782 /* Main.storyboard in Resources */,
-				0074BEEA2597B73900F0DFB3 /* ali.png in Resources */,
 				607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */,
-				0074BEDC25979B9400F0DFB3 /* xiancun.jpg in Resources */,
+				1A344A052765F77F00B2CD1C /* cover_ali.jpg in Resources */,
 				607FACDD1AFB9204008FA782 /* Images.xcassets in Resources */,
+				1AF18FC12711A438005A4E54 /* girl.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

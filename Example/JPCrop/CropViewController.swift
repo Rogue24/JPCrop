@@ -58,7 +58,7 @@ class CropViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
 }
 
-// MARK:- 监听Slider（旋转）
+// MARK: - 监听Slider（旋转）
 extension CropViewController {
     @objc func beginSlider() {
         croper.showRotateGrid(animated: true)
@@ -74,7 +74,7 @@ extension CropViewController {
     }
 }
 
-// MARK:- 监听裁剪/恢复/裁剪事件
+// MARK: - 监听裁剪/恢复/裁剪事件
 extension CropViewController {
     @IBAction func goBack() {
         navigationController?.popViewController(animated: true)
@@ -101,21 +101,21 @@ extension CropViewController {
     }
 }
 
-// MARK:- 监听比例切换事件
+// MARK: - 监听比例切换事件
 extension CropViewController {
     @IBAction func originWHRatio() {
         croper.updateCropWHRatio(0, rotateGridCount: (5, 5), animated: true)
     }
     
-    @IBAction func three2four() {
-        croper.updateCropWHRatio(3.0 / 4.0, rotateGridCount: (6, 5), animated: true)
+    @IBAction func firstWHRatio() {
+        croper.updateCropWHRatio(9.0 / 16.0, rotateGridCount: (6, 5), animated: true)
     }
     
-    @IBAction func one2one() {
+    @IBAction func secondWHRatio() {
         croper.updateCropWHRatio(1, rotateGridCount: (4, 4), animated: true)
     }
     
-    @IBAction func four2three() {
-        croper.updateCropWHRatio(4.0 / 3.0, rotateGridCount: (4, 5), animated: true)
+    @IBAction func thirdWHRatio() {
+        croper.updateCropWHRatio(16.0 / 9.0, rotateGridCount: (4, 5), animated: true)
     }
 }

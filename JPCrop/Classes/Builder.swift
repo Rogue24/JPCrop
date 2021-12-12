@@ -60,13 +60,13 @@ extension Croper {
         guard gridCount.verCount > 1, gridCount.horCount > 1 else { return gridPath }
         let verSpace = cropFrame.height / CGFloat(gridCount.verCount)
         let horSpace = cropFrame.width / CGFloat(gridCount.horCount)
-        for i in 1..<gridCount.verCount {
+        for i in 1 ..< gridCount.verCount {
             let px = cropFrame.origin.x
             let py = cropFrame.origin.y + verSpace * CGFloat(i)
             gridPath.move(to: .init(x: px, y: py))
             gridPath.addLine(to: .init(x: px + cropFrame.width, y: py))
         }
-        for i in 1..<gridCount.horCount {
+        for i in 1 ..< gridCount.horCount {
             let px = cropFrame.origin.x + horSpace * CGFloat(i)
             let py = cropFrame.origin.y
             gridPath.move(to: .init(x: px, y: py))

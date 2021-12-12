@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KZI-aC-v6W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KZI-aC-v6W">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="xiancun.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="bL1-a9-M6s">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="girl.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="bL1-a9-M6s">
                                 <rect key="frame" x="20" y="108" width="374" height="734"/>
                             </imageView>
                         </subviews>
@@ -98,28 +98,32 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="op2-lG-dLB">
-                                        <rect key="frame" x="284" y="10" width="30" height="30"/>
-                                        <state key="normal" title="3:4"/>
+                                        <rect key="frame" x="260" y="10" width="38" height="30"/>
+                                        <state key="normal" title="9 : 16"/>
                                         <connections>
-                                            <action selector="three2four" destination="d9m-Vg-mhN" eventType="touchUpInside" id="pNv-Lz-Kui"/>
+                                            <action selector="firstWHRatio" destination="d9m-Vg-mhN" eventType="touchUpInside" id="4OD-4j-Yaa"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SZn-92-XZx">
-                                        <rect key="frame" x="324" y="10" width="30" height="30"/>
-                                        <state key="normal" title="1:1"/>
+                                        <rect key="frame" x="308" y="10" width="38" height="30"/>
+                                        <state key="normal" title="1 : 1"/>
                                         <connections>
-                                            <action selector="one2one" destination="d9m-Vg-mhN" eventType="touchUpInside" id="7E6-pG-Eb5"/>
+                                            <action selector="secondWHRatio" destination="d9m-Vg-mhN" eventType="touchUpInside" id="jYU-Io-4o4"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCr-wB-QDQ">
-                                        <rect key="frame" x="364" y="10" width="30" height="30"/>
-                                        <state key="normal" title="4:3"/>
+                                        <rect key="frame" x="356" y="10" width="38" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="38" id="1jB-Nh-O3w"/>
+                                            <constraint firstAttribute="height" constant="30" id="wny-e2-n9j"/>
+                                        </constraints>
+                                        <state key="normal" title="16 : 9"/>
                                         <connections>
-                                            <action selector="four2three" destination="d9m-Vg-mhN" eventType="touchUpInside" id="Xc2-ee-pJ7"/>
+                                            <action selector="thirdWHRatio" destination="d9m-Vg-mhN" eventType="touchUpInside" id="ozJ-pf-uiM"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ags-33-fv6">
-                                        <rect key="frame" x="243" y="10" width="31" height="30"/>
+                                        <rect key="frame" x="219" y="10" width="31" height="30"/>
                                         <state key="normal" title="原始"/>
                                         <connections>
                                             <action selector="originWHRatio" destination="d9m-Vg-mhN" eventType="touchUpInside" id="AXa-XN-3Wu"/>
@@ -128,21 +132,25 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstItem="Ags-33-fv6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Big-pZ-QOK" secondAttribute="trailing" constant="8" symbolic="YES" id="5BB-Nr-ocN"/>
                                     <constraint firstItem="SZn-92-XZx" firstAttribute="centerY" secondItem="Ags-33-fv6" secondAttribute="centerY" id="5Ln-dN-9MZ"/>
+                                    <constraint firstItem="SZn-92-XZx" firstAttribute="height" secondItem="op2-lG-dLB" secondAttribute="height" id="6DR-Qu-Tpa"/>
                                     <constraint firstItem="K0f-8T-hva" firstAttribute="leading" secondItem="lyz-yb-0gp" secondAttribute="leading" constant="20" id="81M-aj-U5Y"/>
                                     <constraint firstItem="SZn-92-XZx" firstAttribute="leading" secondItem="op2-lG-dLB" secondAttribute="trailing" constant="10" id="BMz-l3-agL"/>
+                                    <constraint firstItem="NCr-wB-QDQ" firstAttribute="height" secondItem="op2-lG-dLB" secondAttribute="height" id="CtI-k7-or7"/>
                                     <constraint firstItem="lzS-w7-t3M" firstAttribute="leading" secondItem="K0f-8T-hva" secondAttribute="trailing" constant="10" id="Heu-j6-k2d"/>
                                     <constraint firstItem="NCr-wB-QDQ" firstAttribute="leading" secondItem="SZn-92-XZx" secondAttribute="trailing" constant="10" id="N2q-hY-QcY"/>
                                     <constraint firstAttribute="height" constant="100" id="QV3-bG-w3X"/>
+                                    <constraint firstItem="NCr-wB-QDQ" firstAttribute="top" secondItem="lyz-yb-0gp" secondAttribute="top" constant="10" id="To3-Qt-qw1"/>
                                     <constraint firstAttribute="trailing" secondItem="mlL-aU-Odm" secondAttribute="trailing" constant="20" id="VAH-66-tRe"/>
-                                    <constraint firstItem="NCr-wB-QDQ" firstAttribute="centerY" secondItem="K0f-8T-hva" secondAttribute="centerY" id="WA9-O0-eVW"/>
                                     <constraint firstItem="Big-pZ-QOK" firstAttribute="centerY" secondItem="K0f-8T-hva" secondAttribute="centerY" id="Wkn-21-Ozs"/>
                                     <constraint firstItem="op2-lG-dLB" firstAttribute="centerY" secondItem="Ags-33-fv6" secondAttribute="centerY" id="YsL-dD-bRT"/>
                                     <constraint firstItem="K0f-8T-hva" firstAttribute="top" secondItem="lyz-yb-0gp" secondAttribute="top" constant="10" id="YsV-09-GDw"/>
+                                    <constraint firstItem="NCr-wB-QDQ" firstAttribute="width" secondItem="op2-lG-dLB" secondAttribute="width" id="Zae-1N-HAH"/>
                                     <constraint firstItem="mlL-aU-Odm" firstAttribute="leading" secondItem="lyz-yb-0gp" secondAttribute="leading" constant="20" id="amU-qm-OUn"/>
                                     <constraint firstItem="op2-lG-dLB" firstAttribute="leading" secondItem="Ags-33-fv6" secondAttribute="trailing" constant="10" id="ckN-hF-PTN"/>
                                     <constraint firstItem="lzS-w7-t3M" firstAttribute="centerY" secondItem="K0f-8T-hva" secondAttribute="centerY" id="evz-T2-LGY"/>
+                                    <constraint firstItem="Ags-33-fv6" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="Big-pZ-QOK" secondAttribute="trailing" constant="8" symbolic="YES" id="fNe-Xm-lny"/>
+                                    <constraint firstItem="SZn-92-XZx" firstAttribute="width" secondItem="op2-lG-dLB" secondAttribute="width" id="kRf-P0-h9h"/>
                                     <constraint firstAttribute="trailing" secondItem="NCr-wB-QDQ" secondAttribute="trailing" constant="20" id="kfl-5G-9HT"/>
                                     <constraint firstItem="Big-pZ-QOK" firstAttribute="leading" secondItem="lzS-w7-t3M" secondAttribute="trailing" constant="10" id="l7H-Ix-maq"/>
                                     <constraint firstAttribute="bottom" secondItem="mlL-aU-Odm" secondAttribute="bottom" constant="20" id="mU7-V9-4Oj"/>
@@ -186,6 +194,6 @@
     </scenes>
     <resources>
         <image name="crop.rotate" catalog="system" width="114" height="128"/>
-        <image name="xiancun.jpg" width="4032" height="3024"/>
+        <image name="girl.jpg" width="460.79998779296875" height="259.20001220703125"/>
     </resources>
 </document>

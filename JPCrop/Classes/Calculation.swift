@@ -44,11 +44,21 @@ extension Croper {
     
     func fitCropFrame() -> CGRect {
         let margin = Self.margin
-        let w = bounds.width - margin * 2
-        let h = w / (cropWHRatio > 0 ? cropWHRatio : checkCropWHRatio(imageWHRatio))
-        let x = margin
-        let y = margin + (bounds.height - margin * 2 - h) * 0.5
-        return .init(x: x, y: y, width: w, height: h)
+        let maxW = bounds.width - margin * 2
+        let maxH = bounds.height - margin * 2
+        let whRatio = cropWHRatio > 0 ? cropWHRatio : checkCropWHRatio(imageWHRatio)
+        
+        var w = maxW
+        var h = w / whRatio
+        if h > maxH {
+            h = maxH
+            w = h * whRatio
+        }
+        
+        let x = margin + (maxW - w) * 0.5
+        let y = margin + (maxH - h) * 0.5
+        
+        return CGRect(x: x, y: y, width: w, height: h)
     }
     
     func fitImageSize() -> CGSize {
