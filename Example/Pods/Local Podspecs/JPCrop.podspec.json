@@ -1,8 +1,8 @@
 {
   "name": "JPCrop",
-  "version": "0.1.0",
-  "summary": "A short description of JPCrop.",
-  "description": "TODO: Add long description of the pod here.",
+  "version": "0.1.2",
+  "summary": "A clipping tool that can fine tune the direction of rotation.",
+  "description": "A clipping tool that can fine tune the direction of rotation.",
   "homepage": "https://github.com/Rogue24/JPCrop",
   "license": {
     "type": "MIT",
@@ -13,10 +13,12 @@
   },
   "source": {
     "git": "https://github.com/Rogue24/JPCrop.git",
-    "tag": "0.1.0"
+    "tag": "0.1.2"
   },
   "platforms": {
     "ios": "9.0"
   },
-  "source_files": "JPCrop/Classes/**/*"
+  "source_files": "JPCrop/Classes/**/*",
+  "swift_versions": "5.0",
+  "swift_version": "5.0"
 }

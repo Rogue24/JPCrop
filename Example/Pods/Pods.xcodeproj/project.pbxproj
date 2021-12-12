@@ -32,21 +32,21 @@
 /* Begin PBXFileReference section */
 		0285341E10A10FCE601F3912C3856CFC /* Pods-JPCrop_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-JPCrop_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
 		048E2E5533CBFCD971B7220CFD49C546 /* Configure.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Configure.swift; path = JPCrop/Classes/Configure.swift; sourceTree = "<group>"; };
-		049902CE95E177FA5FB79E1AD2A65341 /* Pods_JPCrop_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_JPCrop_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		0ADA2C421E40C9E0E36BF9405CB6C974 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		049902CE95E177FA5FB79E1AD2A65341 /* Pods_JPCrop_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_JPCrop_Example.framework; path = "Pods-JPCrop_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0ADA2C421E40C9E0E36BF9405CB6C974 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		0DFDE97B470D524CD08415F00233C1D7 /* JPCrop-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "JPCrop-Info.plist"; sourceTree = "<group>"; };
 		1BC0D9253EA9CA4FF13365B30837BC79 /* JPCrop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JPCrop.release.xcconfig; sourceTree = "<group>"; };
 		487668827F8000CC80E44058E5E78D95 /* Pods-JPCrop_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-JPCrop_Example-dummy.m"; sourceTree = "<group>"; };
 		48A64DAF27C3AA1FA7761BF8145E167B /* JPCrop-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "JPCrop-dummy.m"; sourceTree = "<group>"; };
 		50687C4C881557F40C7A861CAACABEF6 /* JPCrop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JPCrop.debug.xcconfig; sourceTree = "<group>"; };
-		5C486813DD34575BEB05ECF2CE808917 /* JPCrop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = JPCrop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		5C486813DD34575BEB05ECF2CE808917 /* JPCrop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = JPCrop.framework; path = JPCrop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		639188CE156612F10B7429D3FA1A47E5 /* Pods-JPCrop_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-JPCrop_Example-acknowledgements.plist"; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		7B8E505019FC3C5A3313C646B4B9AEA0 /* Pods-JPCrop_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-JPCrop_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		84B7E44382FF0863F90DD69BF749B5BB /* JPCrop-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JPCrop-umbrella.h"; sourceTree = "<group>"; };
 		8BCBB55807D09829158BE97B0AAE900E /* Croper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Croper.swift; path = JPCrop/Classes/Croper.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9F46B8EFC4C9735BC6302711907CAF96 /* JPCrop.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = JPCrop.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9F46B8EFC4C9735BC6302711907CAF96 /* JPCrop.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = JPCrop.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		A4B32A9BE13731CDE0AC0E29B8A3E82D /* JPCrop-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JPCrop-prefix.pch"; sourceTree = "<group>"; };
 		B657D59C4297159124FCE0474D5E26D5 /* Builder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Builder.swift; path = JPCrop/Classes/Builder.swift; sourceTree = "<group>"; };
 		CFE31F00743ABB81BB94EBDAB21F84C6 /* Pods-JPCrop_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-JPCrop_Example-umbrella.h"; sourceTree = "<group>"; };
@@ -55,7 +55,7 @@
 		E3851534EBD47C17E8DA2CE358EBE4A5 /* Pods-JPCrop_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-JPCrop_Example-Info.plist"; sourceTree = "<group>"; };
 		EBFF994F3CA9B7EABB9BF18C2416668B /* Pods-JPCrop_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-JPCrop_Example.modulemap"; sourceTree = "<group>"; };
 		EE2E22A127E136F9DEA882BC1975E5BF /* Pods-JPCrop_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-JPCrop_Example.release.xcconfig"; sourceTree = "<group>"; };
-		F6CA7BE3C4840CBD6578D5D1798AD3A9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		F6CA7BE3C4840CBD6578D5D1798AD3A9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		FDB0EA584625344D6E9BFC261C0B023E /* Calculation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Calculation.swift; path = JPCrop/Classes/Calculation.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -82,10 +82,10 @@
 		23ADF90C4C9FA8B93106FF029C9A4435 /* JPCrop */ = {
 			isa = PBXGroup;
 			children = (
-				048E2E5533CBFCD971B7220CFD49C546 /* Configure.swift */,
-				8BCBB55807D09829158BE97B0AAE900E /* Croper.swift */,
 				B657D59C4297159124FCE0474D5E26D5 /* Builder.swift */,
 				FDB0EA584625344D6E9BFC261C0B023E /* Calculation.swift */,
+				048E2E5533CBFCD971B7220CFD49C546 /* Configure.swift */,
+				8BCBB55807D09829158BE97B0AAE900E /* Croper.swift */,
 				7E49DEA1A32471737FAC88DEFCB9AE25 /* Pod */,
 				7AF20A63D2442C127EF901DD6186C42C /* Support Files */,
 			);
@@ -253,12 +253,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1220;
-				TargetAttributes = {
-					548657D290D5BB84737DDCFC34E67ADF = {
-						LastSwiftMigration = 1220;
-					};
-				};
+				LastUpgradeCheck = 1100;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -329,37 +324,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		1E137D8594E47797F61B11218734744E /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1BC0D9253EA9CA4FF13365B30837BC79 /* JPCrop.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/JPCrop/JPCrop-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/JPCrop/JPCrop-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/JPCrop/JPCrop.modulemap";
-				PRODUCT_MODULE_NAME = JPCrop;
-				PRODUCT_NAME = JPCrop;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
 		25AD9454612BF454A1E3DC4CD4FA8C6D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -413,7 +377,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -441,7 +405,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-JPCrop_Example/Pods-JPCrop_Example-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-JPCrop_Example/Pods-JPCrop_Example.modulemap";
@@ -452,6 +416,37 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		659B3999C21E68051AE93FECF1532E43 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1BC0D9253EA9CA4FF13365B30837BC79 /* JPCrop.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/JPCrop/JPCrop-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/JPCrop/JPCrop-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/JPCrop/JPCrop.modulemap";
+				PRODUCT_MODULE_NAME = JPCrop;
+				PRODUCT_NAME = JPCrop;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -474,7 +469,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = "Target Support Files/Pods-JPCrop_Example/Pods-JPCrop_Example-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-JPCrop_Example/Pods-JPCrop_Example.modulemap";
@@ -491,7 +486,7 @@
 			};
 			name = Debug;
 		};
-		B9F8E0BB55288346C4DEEAE494CC41C2 /* Debug */ = {
+		AB220B7F4AC572AC2E117453C41BA416 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 50687C4C881557F40C7A861CAACABEF6 /* JPCrop.debug.xcconfig */;
 			buildSettings = {
@@ -506,7 +501,7 @@
 				GCC_PREFIX_HEADER = "Target Support Files/JPCrop/JPCrop-prefix.pch";
 				INFOPLIST_FILE = "Target Support Files/JPCrop/JPCrop-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/JPCrop/JPCrop.modulemap";
 				PRODUCT_MODULE_NAME = JPCrop;
@@ -571,12 +566,13 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
@@ -606,8 +602,8 @@
 		8B2E04B28343F7DD8684D9D3282BF742 /* Build configuration list for PBXNativeTarget "JPCrop" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B9F8E0BB55288346C4DEEAE494CC41C2 /* Debug */,
-				1E137D8594E47797F61B11218734744E /* Release */,
+				AB220B7F4AC572AC2E117453C41BA416 /* Debug */,
+				659B3999C21E68051AE93FECF1532E43 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
