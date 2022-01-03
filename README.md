@@ -9,14 +9,14 @@
 Tool class with high imitation of cutting function of little red book app.
 [Juejin Blog](https://juejin.cn/post/6910627272215150600)
 
+![example](https://github.com/Rogue24/JPCover/raw/master/JPCrop/example.gif)
+
     高仿小红书App裁剪功能的工具：
         1.集成类似小红书基本的裁剪功能；
         2.API简单易用；
         3.切换裁剪比例时可设置带有动画过渡，不会那么生硬；
         4.可异步可同步裁剪，并且可压缩。
         
-![example](https://github.com/Rogue24/JPCover/raw/master/JPCrop/example.gif)
-
 ## How to use
 
 Is so easy:
