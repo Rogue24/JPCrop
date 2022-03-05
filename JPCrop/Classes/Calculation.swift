@@ -8,37 +8,36 @@
 import UIKit
 
 extension Croper {
-    func checkCropWHRatio(_ cropWHRatio: CGFloat, isCallBack: Bool = false) -> CGFloat {
-        if cropWHRatio < Self.cropWHRatioRange.lowerBound {
+    func fitCropWHRatio(_ cropWHRatio: CGFloat, isCallBack: Bool = false) -> CGFloat {
+        let range = Self.cropWHRatioRange
+        
+        if cropWHRatio < range.lowerBound {
             if isCallBack, let overstep = cropWHRatioRangeOverstep {
-                overstep(false, Self.cropWHRatioRange.lowerBound)
+                overstep(false, range.lowerBound)
             }
             
-            if cropWHRatio <= 0 {
-                return 0
-            }
-            return Self.cropWHRatioRange.lowerBound
+            return cropWHRatio <= 0 ? 0 : range.lowerBound
         }
         
-        if cropWHRatio > Self.cropWHRatioRange.upperBound {
+        if cropWHRatio > range.upperBound {
             if isCallBack, let overstep = cropWHRatioRangeOverstep {
-                overstep(true, Self.cropWHRatioRange.upperBound)
+                overstep(true, range.upperBound)
             }
             
-            return Self.cropWHRatioRange.upperBound
+            return range.upperBound
         }
         
         return cropWHRatio
     }
     
-    func checkRadian(_ radian: CGFloat) -> CGFloat {
-        switch radian {
-        case ...Self.radianRange.lowerBound:
-            return Self.radianRange.lowerBound
-        case Self.radianRange.upperBound...:
-            return Self.radianRange.upperBound
+    func fitAngle(_ angle: CGFloat) -> CGFloat {
+        switch angle {
+        case ...angleRange.lowerBound:
+            return angleRange.lowerBound
+        case angleRange.upperBound...:
+            return angleRange.upperBound
         default:
-            return radian
+            return angle
         }
     }
     
@@ -46,7 +45,7 @@ extension Croper {
         let margin = Self.margin
         let maxW = bounds.width - margin * 2
         let maxH = bounds.height - margin * 2
-        let whRatio = cropWHRatio > 0 ? cropWHRatio : checkCropWHRatio(imageWHRatio)
+        let whRatio = cropWHRatio > 0 ? cropWHRatio : fitCropWHRatio(imageWHRatio)
         
         var w = maxW
         var h = w / whRatio
@@ -79,35 +78,53 @@ extension Croper {
                 imageW = imageH * imageWHRatio
             }
         }
-        return .init(width: imageW, height: imageH)
+        return CGSize(width: imageW, height: imageH)
     }
     
     func fitFactor() -> (scale: CGFloat, transform: CGAffineTransform, contentInset: UIEdgeInsets) {
-        let absRadian = fabs(Double(radian))
-        let cosValue = CGFloat(cos(absRadian))
-        let sinValue = CGFloat(sin(absRadian))
+        let imageW = imageBoundsSize.width
+        let imageH = imageBoundsSize.height
         
-        let verSide1 = cosValue * cropFrame.height
-        let verSide2 = sinValue * cropFrame.width
+        let cropW = cropFrame.width
+        let cropH = cropFrame.height
         
-        let horSide1 = cosValue * cropFrame.width
-        let horSide2 = sinValue * cropFrame.height
+        let actualRadian = self.actualRadian
+        let absRadian = fabs(Double(actualRadian))
+        let cosValue = CGFloat(fabs(cos(absRadian)))
+        let sinValue = CGFloat(fabs(sin(absRadian)))
+        
+        let verSide1 = cosValue * cropH
+        let verSide2 = sinValue * cropW
+        let verSide = verSide1 + verSide2
+        
+        let horSide1 = cosValue * cropW
+        let horSide2 = sinValue * cropH
+        let horSide = horSide1 + horSide2
         
         let scale: CGFloat
-        let verMargin: CGFloat
-        let horMargin: CGFloat
-        if isLandscapeImage {
-            scale = (verSide1 + verSide2) / cropFrame.height
-            verMargin = minVerMargin
-            horMargin = (cropFrame.width * scale - (horSide1 + horSide2)) * 0.5 / scale + minHorMargin
+        if imageW > cropW || imageH > cropH {
+            if cropW > cropH {
+                let scale1 = verSide / imageH
+                let scale2 = horSide / cropW
+                scale = max(scale1, scale2)
+            } else {
+                let scale1 = horSide / imageW
+                let scale2 = verSide / cropH
+                scale = max(scale1, scale2)
+            }
         } else {
-            scale = (horSide1 + horSide2) / cropFrame.width
-            verMargin = (cropFrame.height * scale - (verSide1 + verSide2)) * 0.5 / scale + minVerMargin
-            horMargin = minHorMargin
+            if isLandscapeImage {
+                scale = verSide / cropH
+            } else {
+                scale = horSide / cropW
+            }
         }
         
+        let verMargin = (cropH * scale - verSide) * 0.5 / scale + minVerMargin
+        let horMargin = (cropW * scale - horSide) * 0.5 / scale + minHorMargin
+        
         return (scale,
-                CGAffineTransform(rotationAngle: radian).scaledBy(x: scale, y: scale),
+                CGAffineTransform(rotationAngle: actualRadian).scaledBy(x: scale, y: scale),
                 UIEdgeInsets(top: verMargin, left: horMargin, bottom: verMargin, right: horMargin))
     }
     
@@ -119,7 +136,7 @@ extension Croper {
         var offsetY = ySclae * size.height - sBounds.height * 0.5
         
         guard let insets = contentInset else {
-            return .init(x: offsetX, y: offsetY)
+            return CGPoint(x: offsetX, y: offsetY)
         }
         
         let maxOffsetX = size.width - sBounds.width + insets.right
@@ -137,8 +154,6 @@ extension Croper {
             offsetY = maxOffsetY
         }
         
-        return .init(x: offsetX, y: offsetY)
+        return CGPoint(x: offsetX, y: offsetY)
     }
-    
-    func scaleValue(_ t: CGAffineTransform) -> CGFloat { sqrt(t.a * t.a + t.c * t.c) }
 }

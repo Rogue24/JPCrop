@@ -2,7 +2,7 @@
 
 [![Language](http://img.shields.io/badge/language-Swift-brightgreen.svg?style=flat)](https://developer.apple.com/Swift)
 
-![effect](https://github.com/Rogue24/JPCover/raw/master/JPCrop/cover.png)
+![effect](https://github.com/Rogue24/JPCover/raw/master/JPCrop/cover.jpg)
 
 ## Example
 
@@ -12,9 +12,9 @@ Tool class with high imitation of cutting function of little red book app.
 ![example](https://github.com/Rogue24/JPCover/raw/master/JPCrop/example.gif)
 
     高仿小红书App裁剪功能的工具：
-        1.集成类似小红书基本的裁剪功能；
+        1.集成类似小红书基本的裁剪功能（自定义裁剪比例 + 360°任意旋转）；
         2.API简单易用；
-        3.切换裁剪比例时可设置带有动画过渡，不会那么生硬；
+        3.切换裁剪比例带有动画过渡，不会那么生硬；
         4.可异步可同步裁剪，并且可压缩。
         
 ## How to use
@@ -28,7 +28,7 @@ import JPCrop
 
 // 2.Initialize
 let frame = CGRect(...
-let configure = Configure(image)
+let configure = Croper.Configure(image)
 let croper = Croper(frame: frame, configure)
 
 // 3.Add to superview, done!
@@ -37,8 +37,21 @@ view.insertSubview(croper, at: 0)
 
 ### Rotate
 ```swift
-// Default radian range is -45° ~ 45°
-croper.updateRadian(radian)
+// The angle range is -45° ~ 45°
+croper.rotate(angle)
+
+/**
+ * originAngle: Rotation origin angle.
+ * There are four origins: 0°/360°, 90°, 180°, 270°
+ */
+
+// Rotate left (originAngle - 90°)
+// animated: with animation or not
+croper.rotateLeft(animated: true)
+        
+// Rotate right (originAngle + 90°)
+// animated: with animation or not
+croper.rotateRight(animated: true)
 
 // Show grid before rotating
 // animated: with animation or not

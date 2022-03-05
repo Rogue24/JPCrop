@@ -7,20 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1C5975CD3FCFBE2CB69C778C475CACF1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		2BA9A4262242201B734C4594D9A3E224 /* JPCrop-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 48A64DAF27C3AA1FA7761BF8145E167B /* JPCrop-dummy.m */; };
-		3050BD9078D6592D85DCC7575DA65CD5 /* Croper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BCBB55807D09829158BE97B0AAE900E /* Croper.swift */; };
-		49841E6286E58F94F6C2CB7AE1F5E389 /* Pods-JPCrop_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CFE31F00743ABB81BB94EBDAB21F84C6 /* Pods-JPCrop_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		57EEA739B09BFF2FF5C8F326A5F6C381 /* Configure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 048E2E5533CBFCD971B7220CFD49C546 /* Configure.swift */; };
-		600A148B6A17CB460D18C4955122D1E1 /* Pods-JPCrop_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 487668827F8000CC80E44058E5E78D95 /* Pods-JPCrop_Example-dummy.m */; };
-		7CE717E9389967D592D0BC08AC781F5E /* JPCrop-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 84B7E44382FF0863F90DD69BF749B5BB /* JPCrop-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A4DB154285101184EB2C38FAF0AE36EB /* Calculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDB0EA584625344D6E9BFC261C0B023E /* Calculation.swift */; };
-		AB88D17008DA111A2CFB24B79C948F7B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		FAEB47626584AD26385BDAFF3D9528EA /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B657D59C4297159124FCE0474D5E26D5 /* Builder.swift */; };
+		0DF83B51A33D5FE8B7597470052B599F /* Calculation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7AEE3D8D7A406ECC010573048DF30696 /* Calculation.swift */; };
+		0ECD872B1005525EF76B9CA93C3D952A /* Configure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575A54125C9DC2A04F191C66CB935376 /* Configure.swift */; };
+		15D767BC91F1D86865A48D412CD5B61C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		2610BCB08107D2A671EF26F16A1CA538 /* Pods-JPCrop_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = CFE31F00743ABB81BB94EBDAB21F84C6 /* Pods-JPCrop_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		8BBF019772E0E84EF2F3FE746D246FEC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
+		926D7006F521B534F1044C0CF8C6022B /* Builder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 011AE43310BA233F7686B42C2E0F50DD /* Builder.swift */; };
+		A746571928453FC4F46BEA1F9C021AF6 /* JPCrop-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 91148F7B9AD923F2CFB3ACDD048F10C6 /* JPCrop-dummy.m */; };
+		A866B73FC0E85DC8D626AA2E298B8207 /* Pods-JPCrop_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 487668827F8000CC80E44058E5E78D95 /* Pods-JPCrop_Example-dummy.m */; };
+		BAE290B99AEE899EEF2E8251E0829D2D /* Croper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2C1BFA81C680F3A31D6A3AE49DCBE9C /* Croper.swift */; };
+		F00BAF6E09ADC34AB3D6EA2E309257F6 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC4F2B1DF215307FB64C00304B0BB0E /* API.swift */; };
+		FCAD446DCAF81D951ECF4F07A8B86CB0 /* JPCrop-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 11A5A6F25696741166F5938D4EA801F6 /* JPCrop-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		B0D0C142E38D4E5552CEDCC56B21ED9E /* PBXContainerItemProxy */ = {
+		8CBEFF32384F9CF4374AAA1E729BD482 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
@@ -30,69 +31,56 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		011AE43310BA233F7686B42C2E0F50DD /* Builder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Builder.swift; path = JPCrop/Classes/Builder.swift; sourceTree = "<group>"; };
 		0285341E10A10FCE601F3912C3856CFC /* Pods-JPCrop_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-JPCrop_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		048E2E5533CBFCD971B7220CFD49C546 /* Configure.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Configure.swift; path = JPCrop/Classes/Configure.swift; sourceTree = "<group>"; };
-		049902CE95E177FA5FB79E1AD2A65341 /* Pods_JPCrop_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_JPCrop_Example.framework; path = "Pods-JPCrop_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		0ADA2C421E40C9E0E36BF9405CB6C974 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		0DFDE97B470D524CD08415F00233C1D7 /* JPCrop-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "JPCrop-Info.plist"; sourceTree = "<group>"; };
-		1BC0D9253EA9CA4FF13365B30837BC79 /* JPCrop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JPCrop.release.xcconfig; sourceTree = "<group>"; };
+		049902CE95E177FA5FB79E1AD2A65341 /* Pods-JPCrop_Example */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-JPCrop_Example"; path = Pods_JPCrop_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A649D4B27FED833DC485CDD0019C946 /* JPCrop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JPCrop.debug.xcconfig; sourceTree = "<group>"; };
+		11A5A6F25696741166F5938D4EA801F6 /* JPCrop-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JPCrop-umbrella.h"; sourceTree = "<group>"; };
+		17097B325B1C248CF0553C3A512D29AE /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		1E807B311B9FC665EAC10A6684A1BC6E /* JPCrop-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "JPCrop-Info.plist"; sourceTree = "<group>"; };
 		487668827F8000CC80E44058E5E78D95 /* Pods-JPCrop_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-JPCrop_Example-dummy.m"; sourceTree = "<group>"; };
-		48A64DAF27C3AA1FA7761BF8145E167B /* JPCrop-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "JPCrop-dummy.m"; sourceTree = "<group>"; };
-		50687C4C881557F40C7A861CAACABEF6 /* JPCrop.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JPCrop.debug.xcconfig; sourceTree = "<group>"; };
-		5C486813DD34575BEB05ECF2CE808917 /* JPCrop.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = JPCrop.framework; path = JPCrop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4BC4F2B1DF215307FB64C00304B0BB0E /* API.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = API.swift; path = JPCrop/Classes/API.swift; sourceTree = "<group>"; };
+		575A54125C9DC2A04F191C66CB935376 /* Configure.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Configure.swift; path = JPCrop/Classes/Configure.swift; sourceTree = "<group>"; };
+		5C486813DD34575BEB05ECF2CE808917 /* JPCrop */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = JPCrop; path = JPCrop.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		639188CE156612F10B7429D3FA1A47E5 /* Pods-JPCrop_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-JPCrop_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		6BA3683A77A8A44895A3CDBE30018EE7 /* JPCrop.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = JPCrop.release.xcconfig; sourceTree = "<group>"; };
 		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		7AEE3D8D7A406ECC010573048DF30696 /* Calculation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Calculation.swift; path = JPCrop/Classes/Calculation.swift; sourceTree = "<group>"; };
 		7B8E505019FC3C5A3313C646B4B9AEA0 /* Pods-JPCrop_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-JPCrop_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		84B7E44382FF0863F90DD69BF749B5BB /* JPCrop-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JPCrop-umbrella.h"; sourceTree = "<group>"; };
-		8BCBB55807D09829158BE97B0AAE900E /* Croper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Croper.swift; path = JPCrop/Classes/Croper.swift; sourceTree = "<group>"; };
+		91148F7B9AD923F2CFB3ACDD048F10C6 /* JPCrop-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "JPCrop-dummy.m"; sourceTree = "<group>"; };
+		914FBA393AB0F29C67823BC1D3130B32 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9F46B8EFC4C9735BC6302711907CAF96 /* JPCrop.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = JPCrop.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A4B32A9BE13731CDE0AC0E29B8A3E82D /* JPCrop-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JPCrop-prefix.pch"; sourceTree = "<group>"; };
-		B657D59C4297159124FCE0474D5E26D5 /* Builder.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Builder.swift; path = JPCrop/Classes/Builder.swift; sourceTree = "<group>"; };
+		AEB39F522487D38AAFD07033861899BA /* JPCrop.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = JPCrop.modulemap; sourceTree = "<group>"; };
 		CFE31F00743ABB81BB94EBDAB21F84C6 /* Pods-JPCrop_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-JPCrop_Example-umbrella.h"; sourceTree = "<group>"; };
+		D2C1BFA81C680F3A31D6A3AE49DCBE9C /* Croper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Croper.swift; path = JPCrop/Classes/Croper.swift; sourceTree = "<group>"; };
 		D84D271163682E818C9EF9B09457FAE0 /* Pods-JPCrop_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-JPCrop_Example-frameworks.sh"; sourceTree = "<group>"; };
-		E06FD6BFEC62A170D97C2218E5CF2BD7 /* JPCrop.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = JPCrop.modulemap; sourceTree = "<group>"; };
 		E3851534EBD47C17E8DA2CE358EBE4A5 /* Pods-JPCrop_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-JPCrop_Example-Info.plist"; sourceTree = "<group>"; };
+		EA4641DFDF0BF665F2ACA05F5A41D516 /* JPCrop-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "JPCrop-prefix.pch"; sourceTree = "<group>"; };
 		EBFF994F3CA9B7EABB9BF18C2416668B /* Pods-JPCrop_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-JPCrop_Example.modulemap"; sourceTree = "<group>"; };
 		EE2E22A127E136F9DEA882BC1975E5BF /* Pods-JPCrop_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-JPCrop_Example.release.xcconfig"; sourceTree = "<group>"; };
-		F6CA7BE3C4840CBD6578D5D1798AD3A9 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
-		FDB0EA584625344D6E9BFC261C0B023E /* Calculation.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Calculation.swift; path = JPCrop/Classes/Calculation.swift; sourceTree = "<group>"; };
+		F63BF32EE4B2C4AA9B6C7A384D39A12C /* JPCrop.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = JPCrop.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3A549BAC5D77368CF12D70DED16059EC /* Frameworks */ = {
+		237F53D490E67321F4BF3B53078F28B0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AB88D17008DA111A2CFB24B79C948F7B /* Foundation.framework in Frameworks */,
+				15D767BC91F1D86865A48D412CD5B61C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		883853B5E22DEE56102770A4B6F73DC3 /* Frameworks */ = {
+		DC6356972D6E591BD4F334F6E59A1165 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1C5975CD3FCFBE2CB69C778C475CACF1 /* Foundation.framework in Frameworks */,
+				8BBF019772E0E84EF2F3FE746D246FEC /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		23ADF90C4C9FA8B93106FF029C9A4435 /* JPCrop */ = {
-			isa = PBXGroup;
-			children = (
-				B657D59C4297159124FCE0474D5E26D5 /* Builder.swift */,
-				FDB0EA584625344D6E9BFC261C0B023E /* Calculation.swift */,
-				048E2E5533CBFCD971B7220CFD49C546 /* Configure.swift */,
-				8BCBB55807D09829158BE97B0AAE900E /* Croper.swift */,
-				7E49DEA1A32471737FAC88DEFCB9AE25 /* Pod */,
-				7AF20A63D2442C127EF901DD6186C42C /* Support Files */,
-			);
-			name = JPCrop;
-			path = ../..;
-			sourceTree = "<group>";
-		};
 		2953A2012E276B03B85A37C95B4ED01E /* Targets Support Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -101,21 +89,52 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		3618E134C287862E96E39DA2884ABCC2 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				5C486813DD34575BEB05ECF2CE808917 /* JPCrop.framework */,
-				049902CE95E177FA5FB79E1AD2A65341 /* Pods_JPCrop_Example.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
 			isa = PBXGroup;
 			children = (
 				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		64637565B91A2F254DDF99EC5D4B56AA /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				AEB39F522487D38AAFD07033861899BA /* JPCrop.modulemap */,
+				91148F7B9AD923F2CFB3ACDD048F10C6 /* JPCrop-dummy.m */,
+				1E807B311B9FC665EAC10A6684A1BC6E /* JPCrop-Info.plist */,
+				EA4641DFDF0BF665F2ACA05F5A41D516 /* JPCrop-prefix.pch */,
+				11A5A6F25696741166F5938D4EA801F6 /* JPCrop-umbrella.h */,
+				0A649D4B27FED833DC485CDD0019C946 /* JPCrop.debug.xcconfig */,
+				6BA3683A77A8A44895A3CDBE30018EE7 /* JPCrop.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/JPCrop";
+			sourceTree = "<group>";
+		};
+		6684BFEDA1F3F3C592A42978094711B5 /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				F63BF32EE4B2C4AA9B6C7A384D39A12C /* JPCrop.podspec */,
+				17097B325B1C248CF0553C3A512D29AE /* LICENSE */,
+				914FBA393AB0F29C67823BC1D3130B32 /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		678546035C2DEBEECFC1A1054B12F0BE /* JPCrop */ = {
+			isa = PBXGroup;
+			children = (
+				4BC4F2B1DF215307FB64C00304B0BB0E /* API.swift */,
+				011AE43310BA233F7686B42C2E0F50DD /* Builder.swift */,
+				7AEE3D8D7A406ECC010573048DF30696 /* Calculation.swift */,
+				575A54125C9DC2A04F191C66CB935376 /* Configure.swift */,
+				D2C1BFA81C680F3A31D6A3AE49DCBE9C /* Croper.swift */,
+				6684BFEDA1F3F3C592A42978094711B5 /* Pod */,
+				64637565B91A2F254DDF99EC5D4B56AA /* Support Files */,
+			);
+			name = JPCrop;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		69D1EE694E513B415EA5375F54295F8C /* Pods-JPCrop_Example */ = {
@@ -135,35 +154,19 @@
 			path = "Target Support Files/Pods-JPCrop_Example";
 			sourceTree = "<group>";
 		};
-		7AF20A63D2442C127EF901DD6186C42C /* Support Files */ = {
+		A3EAC3A2A34F578F49218E0B98E3AD38 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E06FD6BFEC62A170D97C2218E5CF2BD7 /* JPCrop.modulemap */,
-				48A64DAF27C3AA1FA7761BF8145E167B /* JPCrop-dummy.m */,
-				0DFDE97B470D524CD08415F00233C1D7 /* JPCrop-Info.plist */,
-				A4B32A9BE13731CDE0AC0E29B8A3E82D /* JPCrop-prefix.pch */,
-				84B7E44382FF0863F90DD69BF749B5BB /* JPCrop-umbrella.h */,
-				50687C4C881557F40C7A861CAACABEF6 /* JPCrop.debug.xcconfig */,
-				1BC0D9253EA9CA4FF13365B30837BC79 /* JPCrop.release.xcconfig */,
+				5C486813DD34575BEB05ECF2CE808917 /* JPCrop */,
+				049902CE95E177FA5FB79E1AD2A65341 /* Pods-JPCrop_Example */,
 			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/JPCrop";
+			name = Products;
 			sourceTree = "<group>";
 		};
-		7E49DEA1A32471737FAC88DEFCB9AE25 /* Pod */ = {
+		CD12E76E73EB537594A0EE6881874A8B /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				9F46B8EFC4C9735BC6302711907CAF96 /* JPCrop.podspec */,
-				F6CA7BE3C4840CBD6578D5D1798AD3A9 /* LICENSE */,
-				0ADA2C421E40C9E0E36BF9405CB6C974 /* README.md */,
-			);
-			name = Pod;
-			sourceTree = "<group>";
-		};
-		89DB7F9FC5FDB68103D38EB7D4CCF31B /* Development Pods */ = {
-			isa = PBXGroup;
-			children = (
-				23ADF90C4C9FA8B93106FF029C9A4435 /* JPCrop */,
+				678546035C2DEBEECFC1A1054B12F0BE /* JPCrop */,
 			);
 			name = "Development Pods";
 			sourceTree = "<group>";
@@ -172,9 +175,9 @@
 			isa = PBXGroup;
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
-				89DB7F9FC5FDB68103D38EB7D4CCF31B /* Development Pods */,
+				CD12E76E73EB537594A0EE6881874A8B /* Development Pods */,
 				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
-				3618E134C287862E96E39DA2884ABCC2 /* Products */,
+				A3EAC3A2A34F578F49218E0B98E3AD38 /* Products */,
 				2953A2012E276B03B85A37C95B4ED01E /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
@@ -190,19 +193,19 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		2835227040AB57FBFAACF8E3ED93CB91 /* Headers */ = {
+		32C6C6B5C0C6F73E3712D8AACE0CC1DF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49841E6286E58F94F6C2CB7AE1F5E389 /* Pods-JPCrop_Example-umbrella.h in Headers */,
+				2610BCB08107D2A671EF26F16A1CA538 /* Pods-JPCrop_Example-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		336C463B5D197A16902AB8747BC38C9E /* Headers */ = {
+		6A6FBE0088714D94A5F17D8934DB9CB0 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7CE717E9389967D592D0BC08AC781F5E /* JPCrop-umbrella.h in Headers */,
+				FCAD446DCAF81D951ECF4F07A8B86CB0 /* JPCrop-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,12 +214,12 @@
 /* Begin PBXNativeTarget section */
 		548657D290D5BB84737DDCFC34E67ADF /* JPCrop */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 8B2E04B28343F7DD8684D9D3282BF742 /* Build configuration list for PBXNativeTarget "JPCrop" */;
+			buildConfigurationList = CC9CC7588BDAEA57141160812F75EE59 /* Build configuration list for PBXNativeTarget "JPCrop" */;
 			buildPhases = (
-				336C463B5D197A16902AB8747BC38C9E /* Headers */,
-				DFBB54E13BBC8635485C23CAC4BC45A0 /* Sources */,
-				3A549BAC5D77368CF12D70DED16059EC /* Frameworks */,
-				A0B634D3F59E17EEB12111B569C9FF6B /* Resources */,
+				6A6FBE0088714D94A5F17D8934DB9CB0 /* Headers */,
+				CA9F702A5590B5DAB3162C1148ACCEEB /* Sources */,
+				237F53D490E67321F4BF3B53078F28B0 /* Frameworks */,
+				480809893B321826F969C1F15FD67BBC /* Resources */,
 			);
 			buildRules = (
 			);
@@ -224,26 +227,26 @@
 			);
 			name = JPCrop;
 			productName = JPCrop;
-			productReference = 5C486813DD34575BEB05ECF2CE808917 /* JPCrop.framework */;
+			productReference = 5C486813DD34575BEB05ECF2CE808917 /* JPCrop */;
 			productType = "com.apple.product-type.framework";
 		};
 		EC94E6715FEE1AB970FBE365217B030D /* Pods-JPCrop_Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2CDA735713EDD2ADC6586FC40A5D5996 /* Build configuration list for PBXNativeTarget "Pods-JPCrop_Example" */;
+			buildConfigurationList = C0BB49DB3F01ABEEEF5F1CC6E452740D /* Build configuration list for PBXNativeTarget "Pods-JPCrop_Example" */;
 			buildPhases = (
-				2835227040AB57FBFAACF8E3ED93CB91 /* Headers */,
-				B278C37D8D92F5577B971CAD1D803148 /* Sources */,
-				883853B5E22DEE56102770A4B6F73DC3 /* Frameworks */,
-				68E5424D9386FFB5338B845FEC747328 /* Resources */,
+				32C6C6B5C0C6F73E3712D8AACE0CC1DF /* Headers */,
+				3275A24E22E1679B3FFD499CD0720C5B /* Sources */,
+				DC6356972D6E591BD4F334F6E59A1165 /* Frameworks */,
+				7283B3169746645A6F96A1C2E8A060FE /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				47CD61938F697F9B6CE455138D473733 /* PBXTargetDependency */,
+				5068144B1CA915F0D38689800B333022 /* PBXTargetDependency */,
 			);
 			name = "Pods-JPCrop_Example";
-			productName = "Pods-JPCrop_Example";
-			productReference = 049902CE95E177FA5FB79E1AD2A65341 /* Pods_JPCrop_Example.framework */;
+			productName = Pods_JPCrop_Example;
+			productReference = 049902CE95E177FA5FB79E1AD2A65341 /* Pods-JPCrop_Example */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
@@ -252,19 +255,19 @@
 		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1100;
-				LastUpgradeCheck = 1100;
+				LastSwiftUpdateCheck = 1240;
+				LastUpgradeCheck = 1240;
 			};
 			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				en,
 			);
 			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
-			productRefGroup = 3618E134C287862E96E39DA2884ABCC2 /* Products */;
+			productRefGroup = A3EAC3A2A34F578F49218E0B98E3AD38 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -275,14 +278,14 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		68E5424D9386FFB5338B845FEC747328 /* Resources */ = {
+		480809893B321826F969C1F15FD67BBC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A0B634D3F59E17EEB12111B569C9FF6B /* Resources */ = {
+		7283B3169746645A6F96A1C2E8A060FE /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -292,38 +295,69 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		B278C37D8D92F5577B971CAD1D803148 /* Sources */ = {
+		3275A24E22E1679B3FFD499CD0720C5B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				600A148B6A17CB460D18C4955122D1E1 /* Pods-JPCrop_Example-dummy.m in Sources */,
+				A866B73FC0E85DC8D626AA2E298B8207 /* Pods-JPCrop_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DFBB54E13BBC8635485C23CAC4BC45A0 /* Sources */ = {
+		CA9F702A5590B5DAB3162C1148ACCEEB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAEB47626584AD26385BDAFF3D9528EA /* Builder.swift in Sources */,
-				A4DB154285101184EB2C38FAF0AE36EB /* Calculation.swift in Sources */,
-				57EEA739B09BFF2FF5C8F326A5F6C381 /* Configure.swift in Sources */,
-				3050BD9078D6592D85DCC7575DA65CD5 /* Croper.swift in Sources */,
-				2BA9A4262242201B734C4594D9A3E224 /* JPCrop-dummy.m in Sources */,
+				F00BAF6E09ADC34AB3D6EA2E309257F6 /* API.swift in Sources */,
+				926D7006F521B534F1044C0CF8C6022B /* Builder.swift in Sources */,
+				0DF83B51A33D5FE8B7597470052B599F /* Calculation.swift in Sources */,
+				0ECD872B1005525EF76B9CA93C3D952A /* Configure.swift in Sources */,
+				BAE290B99AEE899EEF2E8251E0829D2D /* Croper.swift in Sources */,
+				A746571928453FC4F46BEA1F9C021AF6 /* JPCrop-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		47CD61938F697F9B6CE455138D473733 /* PBXTargetDependency */ = {
+		5068144B1CA915F0D38689800B333022 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = JPCrop;
 			target = 548657D290D5BB84737DDCFC34E67ADF /* JPCrop */;
-			targetProxy = B0D0C142E38D4E5552CEDCC56B21ED9E /* PBXContainerItemProxy */;
+			targetProxy = 8CBEFF32384F9CF4374AAA1E729BD482 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		1E64113B5EE6A7CA526DFFD2CD4A2111 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0A649D4B27FED833DC485CDD0019C946 /* JPCrop.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/JPCrop/JPCrop-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/JPCrop/JPCrop-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/JPCrop/JPCrop.modulemap";
+				PRODUCT_MODULE_NAME = JPCrop;
+				PRODUCT_NAME = JPCrop;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
 		25AD9454612BF454A1E3DC4CD4FA8C6D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -390,42 +424,9 @@
 			};
 			name = Debug;
 		};
-		28DD0B3C3B78A1B17B9958B363600B47 /* Release */ = {
+		7244C286FCF6B2704899D6B31EBFF1BB /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EE2E22A127E136F9DEA882BC1975E5BF /* Pods-JPCrop_Example.release.xcconfig */;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = "Target Support Files/Pods-JPCrop_Example/Pods-JPCrop_Example-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-JPCrop_Example/Pods-JPCrop_Example.modulemap";
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		659B3999C21E68051AE93FECF1532E43 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1BC0D9253EA9CA4FF13365B30837BC79 /* JPCrop.release.xcconfig */;
+			baseConfigurationReference = 6BA3683A77A8A44895A3CDBE30018EE7 /* JPCrop.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -454,7 +455,7 @@
 			};
 			name = Release;
 		};
-		89ABB54B12ABDA59316A7B358881B24E /* Debug */ = {
+		819BCA1AA60DA181C74461ED427E4B6F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7B8E505019FC3C5A3313C646B4B9AEA0 /* Pods-JPCrop_Example.debug.xcconfig */;
 			buildSettings = {
@@ -486,10 +487,11 @@
 			};
 			name = Debug;
 		};
-		AB220B7F4AC572AC2E117453C41BA416 /* Debug */ = {
+		96BE3E4565FD876C62163E0D0C24FA12 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 50687C4C881557F40C7A861CAACABEF6 /* JPCrop.debug.xcconfig */;
+			baseConfigurationReference = EE2E22A127E136F9DEA882BC1975E5BF /* Pods-JPCrop_Example.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -498,23 +500,25 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/JPCrop/JPCrop-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/JPCrop/JPCrop-Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-JPCrop_Example/Pods-JPCrop_Example-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/JPCrop/JPCrop.modulemap";
-				PRODUCT_MODULE_NAME = JPCrop;
-				PRODUCT_NAME = JPCrop;
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-JPCrop_Example/Pods-JPCrop_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		CA547D2C7E9A8A153DC2B27FBE00B112 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -581,15 +585,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2CDA735713EDD2ADC6586FC40A5D5996 /* Build configuration list for PBXNativeTarget "Pods-JPCrop_Example" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				89ABB54B12ABDA59316A7B358881B24E /* Debug */,
-				28DD0B3C3B78A1B17B9958B363600B47 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -599,11 +594,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		8B2E04B28343F7DD8684D9D3282BF742 /* Build configuration list for PBXNativeTarget "JPCrop" */ = {
+		C0BB49DB3F01ABEEEF5F1CC6E452740D /* Build configuration list for PBXNativeTarget "Pods-JPCrop_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AB220B7F4AC572AC2E117453C41BA416 /* Debug */,
-				659B3999C21E68051AE93FECF1532E43 /* Release */,
+				819BCA1AA60DA181C74461ED427E4B6F /* Debug */,
+				96BE3E4565FD876C62163E0D0C24FA12 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CC9CC7588BDAEA57141160812F75EE59 /* Build configuration list for PBXNativeTarget "JPCrop" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1E64113B5EE6A7CA526DFFD2CD4A2111 /* Debug */,
+				7244C286FCF6B2704899D6B31EBFF1BB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

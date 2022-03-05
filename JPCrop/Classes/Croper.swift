@@ -10,42 +10,72 @@ import UIKit
 public class Croper: UIView {
     
     // MARK: - 默认初始值
+    
+    /// 裁剪区域的边距
+    public static var margin: CGFloat = 15
+    
+    /// 动画时间
+    public static var animDuration: TimeInterval = 0.3
+    
     /// 裁剪宽高比的范围（默认 最小 `1 : 2` ~ `2 : 1`）
     public static var cropWHRatioRange: ClosedRange<CGFloat> = (1.0 / 2.0) ... 2.0
-    /// 旋转的范围（默认 `-45°` ~ `45°`）
-    public static var radianRange: ClosedRange = (-CGFloat.pi * 0.25) ... (CGFloat.pi * 0.25)
-    /// 裁剪区域的边距
-    public static var margin: CGFloat = 12
-    /// 动画时间
-    public static var animDuration: TimeInterval = 0.25
     
-    // MARK: - 公开可设置的存储属性
+    /// 可旋转的范围角度：`-45°` ~ `45°`
+    public static let diffAngle: CGFloat = 45.0
+    
+    // MARK: - 公开属性
+    
     /// 裁剪图片
     public let image: UIImage
-    /// 图片的宽高比（当 cropWHRatio = 0 时取该值）
+    
+    /// 图片的宽高比（当`cropWHRatio = 0`时取该值）
     public let imageWHRatio: CGFloat
-    /// 是否为横幅图片
-    public var isLandscapeImage: Bool { imageWHRatio > 1 }
+    
+    /// 图片视图基于并适配`cropFrame`的`size`
+    public internal(set) var imageBoundsSize: CGSize = .zero
     
     /// 裁剪宽高比
-    public private(set) var cropWHRatio: CGFloat = 0
-    /// 裁剪框的frame
-    public private(set) var cropFrame: CGRect = .zero
+    public internal(set) var cropWHRatio: CGFloat = 0
     
-    /// 旋转角度（弧度）
-    public private(set) var radian: CGFloat = 0
+    /// 裁剪框的frame
+    public internal(set) var cropFrame: CGRect = .zero
+    
+    /// 旋转基准角度：`0°/360°、90°、180°、270°`
+    public internal(set) var originAngle: OriginAngle = .deg0
+    
+    /// 可旋转角度范围（基于`originAngle`，范围：`-45°` ~ `45°`）
+    public var angleRange: ClosedRange<CGFloat> {
+        (originAngle.rawValue - Self.diffAngle) ... (originAngle.rawValue + Self.diffAngle)
+    }
+    
+    /// 当前实际的旋转角度（范围：`0°` ~ `360°`）
+    public internal(set) var actualAngle: CGFloat = OriginAngle.deg0.rawValue
+    
+    /// 当前调整的旋转角度（基于`originAngle`，范围：`-45°` ~ `45°`）
+    public internal(set) var angle: CGFloat {
+        set { actualAngle = fitAngle(originAngle.rawValue + newValue) }
+        get { actualAngle - originAngle.rawValue }
+    }
+    
+    /// 当前实际的旋转弧度（范围：`0` ~ `2π`）
+    public var actualRadian: CGFloat { (actualAngle / 180.0) * CGFloat.pi }
+    
+    /// 当前调整的旋转弧度（基于`originAngle`，范围：`-π/4` ~ `π/4`）
+    public var radian: CGFloat { (angle / 180.0) * CGFloat.pi }
     
     /// 类型：网格数 - (垂直方向数量, 水平方向数量)
     public typealias GridCount = (verCount: Int, horCount: Int)
+    
     /// 闲置时的网格数
     public var idleGridCount: GridCount = (0, 0)
+    
     /// 旋转时的网格数
     public var rotateGridCount: GridCount = (0, 0)
     
     /// 当设置裁剪宽高比时超出可设置范围时的回调
     public var cropWHRatioRangeOverstep: ((_ isUpper: Bool, _ bound: CGFloat) -> ())?
     
-    // MARK: - 私有的存储属性
+    // MARK: - 私有属性
     var minHorMargin: CGFloat = 0
     var minVerMargin: CGFloat = 0
     
@@ -64,7 +94,8 @@ public class Croper: UIView {
         self.init(frame: frame,
                   configure.image,
                   configure.cropWHRatio,
-                  configure.radian,
+                  configure.originAngle,
+                  configure.angle,
                   configure.zoomScale,
                   configure.contentOffset,
                   idleGridCount,
@@ -74,22 +105,22 @@ public class Croper: UIView {
     public init(frame: CGRect = UIScreen.main.bounds,
                 _ image: UIImage,
                 _ cropWHRatio: CGFloat,
-                _ radian: CGFloat,
+                _ originAngle: OriginAngle,
+                _ angle: CGFloat,
                 _ zoomScale: CGFloat? = nil,
                 _ contentOffset: CGPoint? = nil,
                 _ idleGridCount: GridCount? = nil,
                 _ rotateGridCount: GridCount? = nil) {
+        
         self.image = image
         self.imageWHRatio = image.size.width / image.size.height
+        self.originAngle = originAngle
         
         super.init(frame: frame)
+        
         setupUI()
-        
-        updateCropWHRatio(cropWHRatio,
-                          idleGridCount: idleGridCount,
-                          rotateGridCount: rotateGridCount)
-        
-        updateRadian(radian)
+        updateCropWHRatio(cropWHRatio, idleGridCount: idleGridCount, rotateGridCount: rotateGridCount)
+        rotate(angle)
         
         if let scale = zoomScale { scrollView.zoomScale = scale }
         if let offset = contentOffset { scrollView.contentOffset = offset }
@@ -98,147 +129,61 @@ public class Croper: UIView {
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    // MARK: - Override
+    public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? { scrollView }
 }
 
-// MARK: - API
+// MARK: - UIScrollViewDelegate
+extension Croper: UIScrollViewDelegate {
+    public func viewForZooming(in scrollView: UIScrollView) -> UIView? { imageView }
+}
+
+// MARK: - 私有API
 extension Croper {
-    
-    // MARK: 获取同步的Configure（当前的裁剪元素、状态）
-    /// 获取同步的Configure，可用于保存当前的裁剪状态，下一次打开恢复状态
-    public func syncConfigure() -> Configure {
-        Configure(image,
-                  cropWHRatio: cropWHRatio,
-                  radian: radian,
-                  zoomScale: scrollView.zoomScale,
-                  contentOffset: scrollView.contentOffset)
+    var isLandscapeImage: Bool {
+        imageWHRatio > 1
     }
     
-    // MARK: 旋转
-    /// 刷新旋转角度（单位：弧度）
-    public func updateRadian(_ radian: CGFloat) {
-        self.radian = checkRadian(radian)
-        
+    func scaleValue(_ t: CGAffineTransform) -> CGFloat {
+        sqrt(t.a * t.a + t.c * t.c)
+    }
+    
+    func rotate(_ angle: CGFloat, isAutoZoom: Bool, animated: Bool) {
+        guard animated else {
+            rotate(angle, isAutoZoom: isAutoZoom)
+            return
+        }
+        UIView.animate(withDuration: Self.animDuration) {
+            self.rotate(angle, isAutoZoom: isAutoZoom)
+        }
+    }
+    
+    func rotate(_ angle: CGFloat, isAutoZoom: Bool) {
+        self.angle = angle
         let factor = fitFactor()
         
         var zoomScale = scrollView.zoomScale
-        let minZoomScale = scrollView.minimumZoomScale
         
-        let oldScale = scaleValue(scrollView.transform)
-        let newScale = factor.scale
-        // scrollView 变大/变小多少，zoomScale 则变小/变大多少（反向缩放）
-        // 否则在旋转过程中，裁剪区域在图片上即便有足够空间进行旋转（不超出图片区域），也会跟随 scrollView 变大变小
-        zoomScale *= oldScale / newScale
-        if zoomScale <= minZoomScale { zoomScale = minZoomScale }
+        if !isAutoZoom {
+            let oldScale = scaleValue(scrollView.transform)
+            let newScale = factor.scale
+            // scrollView 变大/变小多少，zoomScale 则变小/变大多少（反向缩放）
+            // 否则在旋转过程中，裁剪区域在图片上即便有足够空间进行旋转（不超出图片区域），也会跟随 scrollView 变大变小
+            zoomScale *= oldScale / newScale
+        }
+        
+        let minZoomScale = scrollView.minimumZoomScale
+        if zoomScale <= minZoomScale {
+            zoomScale = minZoomScale
+        }
         
         scrollView.transform = factor.transform
         scrollView.contentInset = factor.contentInset
         scrollView.zoomScale = zoomScale
     }
     
-    // MARK: 切换裁剪框的宽高比
-    /// 刷新裁剪比例（idleGridCount：闲置时的网格数；rotateGridCount：旋转时的网格数）
-    public func updateCropWHRatio(_ cropWHRatio: CGFloat,
-                                  idleGridCount: GridCount? = nil,
-                                  rotateGridCount: GridCount? = nil,
-                                  animated: Bool = false) {
-        self.cropWHRatio = checkCropWHRatio(cropWHRatio, isCallBack: true)
-        
-        let oldCropFrame = cropFrame
-        cropFrame = fitCropFrame()
-        minHorMargin = (bounds.width - cropFrame.width) * 0.5
-        minVerMargin = (bounds.height - cropFrame.height) * 0.5
-        
-        // 1.算出改变后的UI数值，和改变前后的差值
-        
-        let factor = fitFactor() // 获取 scrollView 最合适（不会超出） cropFrame 和 radian 的 transform 和 contentInset
-        let imageBoundsSize = fitImageSize() // 获取 imageView 适配了 cropFrame 的原始 Size
-        
-        let zoomScale: CGFloat
-        let xScale: CGFloat
-        let yScale: CGFloat
-        if imageView.bounds.width > 0 {
-            let convertOffset = borderLayer.convert(.init(x: oldCropFrame.midX, y: oldCropFrame.midY), to: imageView.layer)
-            xScale = convertOffset.x / imageView.bounds.width
-            yScale = convertOffset.y / imageView.bounds.height
-            
-            let diffScale = scaleValue(scrollView.transform) / scaleValue(factor.transform)
-            zoomScale = imageView.frame.width / imageBoundsSize.width * diffScale
-        } else {
-            xScale = 0.5
-            yScale = 0.5
-            zoomScale = 1
-        }
-        
-        let imageFrameSize = CGSize(width: imageBoundsSize.width * zoomScale, height: imageBoundsSize.height * zoomScale)
-        
-        // 2.立马设置 scrollView 改变后的 transform，和其他的一些差值，让 scrollView 形变后相对于之前的 UI 状态“看上去”没有变化一样
-        
-        imageView.bounds = .init(origin: .zero, size: imageBoundsSize)
-        
-        scrollView.transform = factor.transform
-        if zoomScale < 1 { scrollView.minimumZoomScale = zoomScale }
-        scrollView.zoomScale = zoomScale
-        scrollView.contentSize = imageFrameSize
-        
-        imageView.frame = .init(origin: .zero, size: imageFrameSize)
-        
-        scrollView.contentOffset = fitOffset(xScale, yScale, contentSize: imageFrameSize)
-        
-        // 3.再通过动画适配当前窗口，也就是把差值还原回去
-        
-        let updateScrollView = {
-            if zoomScale < 1 {
-                self.scrollView.minimumZoomScale = 1
-                self.scrollView.zoomScale = 1
-            }
-            self.scrollView.contentInset = factor.contentInset
-            self.scrollView.contentOffset = self.fitOffset(xScale, yScale, contentInset: factor.contentInset)
-        }
-        
-        // 边框路径
-        let borderPath = UIBezierPath(rect: cropFrame)
-        // 阴影路径
-        let shadePath = UIBezierPath(rect: bounds)
-        shadePath.append(borderPath)
-        // 闲置网格路径
-        if let obIdleGridCount = idleGridCount { self.idleGridCount = obIdleGridCount }
-        let idleGridPath = buildGridPath(self.idleGridCount)
-        // 旋转网格路径
-        if let obRotateGridCount = rotateGridCount { self.rotateGridCount = obRotateGridCount }
-        let rotateGridPath = buildGridPath(self.rotateGridCount)
-        
-        if animated {
-            UIView.animate(withDuration: Self.animDuration, delay: 0, options: .curveEaseOut, animations: updateScrollView, completion: nil)
-            buildAnimation(addTo: borderLayer, "path", borderPath.cgPath, Self.animDuration)
-            buildAnimation(addTo: shadeLayer, "path", shadePath.cgPath, Self.animDuration)
-            buildAnimation(addTo: idleGridLayer, "path", idleGridPath.cgPath, Self.animDuration)
-            buildAnimation(addTo: rotateGridLayer, "path", rotateGridPath.cgPath, Self.animDuration)
-        } else {
-            updateScrollView()
-        }
-        
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        borderLayer.path = borderPath.cgPath
-        shadeLayer.path = shadePath.cgPath
-        idleGridLayer.path = idleGridPath.cgPath
-        rotateGridLayer.path = rotateGridPath.cgPath
-        CATransaction.commit()
-    }
-    
-    // MARK: 显示旋转网格
-    /// 显示旋转时的网格数
-    public func showRotateGrid(animated: Bool = false) {
-        updateGrid(0, 1, animated: animated)
-    }
-    
-    // MARK: 隐藏旋转网格
-    /// 隐藏旋转时的网格数
-    public func hideRotateGrid(animated: Bool = false) {
-        updateGrid(1, 0, animated: animated)
-    }
-    
-    private func updateGrid(_ idleGridAlpha: Float, _ rotateGridAlpha: Float, animated: Bool = false) {
+    func updateGrid(_ idleGridAlpha: Float, _ rotateGridAlpha: Float, animated: Bool = false) {
         if animated {
             buildAnimation(addTo: idleGridLayer, "opacity", idleGridAlpha, 0.12, timingFunctionName: .easeIn)
             buildAnimation(addTo: rotateGridLayer, "opacity", rotateGridAlpha, 0.12, timingFunctionName: .easeIn)
@@ -248,65 +193,5 @@ extension Croper {
         idleGridLayer.opacity = idleGridAlpha
         rotateGridLayer.opacity = rotateGridAlpha
         CATransaction.commit()
-    }
-    
-    // MARK: 恢复
-    /// 恢复 --> 角度0 + 缩放比例1 + 中心点
-    public func recover(animated: Bool = false) {
-        radian = 0
-        let factor = fitFactor()
-        let updateScrollView = {
-            self.scrollView.zoomScale = 1
-            self.scrollView.transform = factor.transform
-            self.scrollView.contentInset = factor.contentInset
-            self.scrollView.contentOffset = self.fitOffset(0.5, 0.5, contentInset: factor.contentInset)
-        }
-        if animated {
-            UIView.animate(withDuration: Self.animDuration, delay: 0, options: .curveEaseOut, animations: updateScrollView, completion: nil)
-        } else {
-            updateScrollView()
-        }
-    }
-    
-    // MARK: 同步裁剪
-    /// 裁剪：compressScale：压缩比例，默认为1，即原图尺寸
-    public func crop(_ compressScale: CGFloat = 1) -> UIImage? {
-        guard let imageRef = image.cgImage else { return nil }
-        
-        let convertTranslate = borderLayer.convert(.init(x: cropFrame.origin.x, y: cropFrame.maxY), to: imageView.layer)
-        
-        return Self.crop(compressScale,
-                         imageRef,
-                         cropWHRatio > 0 ? cropWHRatio : checkCropWHRatio(imageWHRatio),
-                         scaleValue(scrollView.transform) * scrollView.zoomScale,
-                         convertTranslate,
-                         radian,
-                         imageView.bounds.height)
-    }
-    
-    // MARK: 异步裁剪
-    /// 裁剪：compressScale：压缩比例，默认为1，即原图尺寸
-    public func asyncCrop(_ compressScale: CGFloat = 1, _ cropDone: @escaping (UIImage?) -> ()) {
-        guard let imageRef = image.cgImage else {
-            cropDone(nil)
-            return
-        }
-        
-        let cropWHRatio = self.cropWHRatio > 0 ? self.cropWHRatio : checkCropWHRatio(imageWHRatio)
-        let scale = scaleValue(scrollView.transform) * scrollView.zoomScale
-        let convertTranslate = borderLayer.convert(.init(x: cropFrame.origin.x, y: cropFrame.maxY), to: imageView.layer)
-        let radian = self.radian
-        let height = imageView.bounds.height
-        
-        DispatchQueue.global().async {
-            let result = Self.crop(compressScale,
-                                   imageRef,
-                                   cropWHRatio,
-                                   scale,
-                                   convertTranslate,
-                                   radian,
-                                   height)
-            DispatchQueue.main.async { cropDone(result) }
-        }
     }
 }

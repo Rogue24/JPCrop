@@ -63,14 +63,14 @@ extension Croper {
         for i in 1 ..< gridCount.verCount {
             let px = cropFrame.origin.x
             let py = cropFrame.origin.y + verSpace * CGFloat(i)
-            gridPath.move(to: .init(x: px, y: py))
-            gridPath.addLine(to: .init(x: px + cropFrame.width, y: py))
+            gridPath.move(to: CGPoint(x: px, y: py))
+            gridPath.addLine(to: CGPoint(x: px + cropFrame.width, y: py))
         }
         for i in 1 ..< gridCount.horCount {
             let px = cropFrame.origin.x + horSpace * CGFloat(i)
             let py = cropFrame.origin.y
-            gridPath.move(to: .init(x: px, y: py))
-            gridPath.addLine(to: .init(x: px, y: py + cropFrame.height))
+            gridPath.move(to: CGPoint(x: px, y: py))
+            gridPath.addLine(to: CGPoint(x: px, y: py + cropFrame.height))
         }
         return gridPath
     }
@@ -81,13 +81,9 @@ extension Croper {
         anim.toValue = toValue
         anim.fillMode = .backwards
         anim.duration = duration
-        anim.timingFunction = .init(name: timingFunctionName)
+        anim.timingFunction = CAMediaTimingFunction(name: timingFunctionName)
         layer.add(anim, forKey: keyPath)
     }
-}
-
-extension Croper: UIScrollViewDelegate {
-    public func viewForZooming(in scrollView: UIScrollView) -> UIView? { imageView }
 }
 
 extension Croper {
@@ -105,14 +101,14 @@ extension Croper {
         // 获取裁剪尺寸和裁剪区域
         var rendSize: CGSize
         if width > height {
-            rendSize = .init(width: height * cropWHRatio, height: height)
+            rendSize = CGSize(width: height * cropWHRatio, height: height)
             if rendSize.width > width {
-                rendSize = .init(width: width, height: width / cropWHRatio)
+                rendSize = CGSize(width: width, height: width / cropWHRatio)
             }
         } else {
-            rendSize = .init(width: width, height: width / cropWHRatio)
+            rendSize = CGSize(width: width, height: width / cropWHRatio)
             if rendSize.height > height {
-                rendSize = .init(width: height * cropWHRatio, height: height)
+                rendSize = CGSize(width: height * cropWHRatio, height: height)
             }
         }
         
@@ -147,7 +143,7 @@ extension Croper {
         let transform = CGAffineTransform(scaleX: scale, y: scale).rotated(by: -radian).translatedBy(x: translate.x, y: translate.y)
         context.concatenate(transform)
         
-        context.draw(imageRef, in: .init(origin: .zero, size: .init(width: width, height: height)))
+        context.draw(imageRef, in: CGRect(origin: .zero, size: CGSize(width: width, height: height)))
         
         guard let newImageRef = context.makeImage() else { return nil }
         return UIImage(cgImage: newImageRef)

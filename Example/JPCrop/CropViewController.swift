@@ -10,12 +10,14 @@ import UIKit
 import JPCrop
 
 class CropViewController: UIViewController {
-    
+    @IBOutlet weak var whRatioBtn: UIButton!
     @IBOutlet weak var slider: UISlider!
     
-    var configure: Configure?
+    typealias CropDone = (UIImage?, Croper.Configure) -> ()
+    
     var croper: Croper!
-    var cropDone: ((UIImage?, Configure) -> ())?
+    var configure: Croper.Configure?
+    var cropDone: CropDone?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +42,9 @@ class CropViewController: UIViewController {
             }
         }
         
-        slider.value = Float(configure.radian / Croper.radianRange.upperBound)
+        slider.minimumValue = -Float(Croper.diffAngle)
+        slider.maximumValue = Float(Croper.diffAngle)
+        slider.value = Float(configure.angle)
         
         slider.addTarget(self, action: #selector(beginSlider), for: .touchDown)
         slider.addTarget(self, action: #selector(sliding), for: .valueChanged)
@@ -58,19 +62,12 @@ class CropViewController: UIViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle { .lightContent }
 }
 
-// MARK: - 监听Slider（旋转）
 extension CropViewController {
-    @objc func beginSlider() {
-        croper.showRotateGrid(animated: true)
-    }
-    
-    @objc func sliding() {
-        let radian = CGFloat(slider.value) * Croper.radianRange.upperBound
-        croper.updateRadian(radian)
-    }
-    
-    @objc func endSlider() {
-        croper.hideRotateGrid(animated: true)
+    static func build(_ configure: Croper.Configure, cropDone: CropDone?) -> Self {
+        let cropVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CropViewController") as! Self
+        cropVC.configure = configure
+        cropVC.cropDone = cropDone
+        return cropVC
     }
 }
 
@@ -103,19 +100,54 @@ extension CropViewController {
 
 // MARK: - 监听比例切换事件
 extension CropViewController {
-    @IBAction func originWHRatio() {
-        croper.updateCropWHRatio(0, rotateGridCount: (5, 5), animated: true)
+    @IBAction func switchWHRatio() {
+        let alertCtr = UIAlertController(title: "切换裁剪宽高比", message: nil, preferredStyle: .actionSheet)
+        
+        alertCtr.addAction(UIAlertAction(title: "原始", style: .default) { _ in
+            self.croper.updateCropWHRatio(0, rotateGridCount: (5, 5), animated: true)
+            self.whRatioBtn.setTitle("原始", for: .normal)
+        })
+        
+        alertCtr.addAction(UIAlertAction(title: "9 : 16", style: .default) { _ in
+            self.croper.updateCropWHRatio(9.0 / 16.0, rotateGridCount: (6, 5), animated: true)
+            self.whRatioBtn.setTitle("9 : 16", for: .normal)
+        })
+        
+        alertCtr.addAction(UIAlertAction(title: "1 : 1", style: .default) { _ in
+            self.croper.updateCropWHRatio(1, rotateGridCount: (4, 4), animated: true)
+            self.whRatioBtn.setTitle("1 : 1", for: .normal)
+        })
+        
+        alertCtr.addAction(UIAlertAction(title: "16 : 3", style: .default) { _ in
+            self.croper.updateCropWHRatio(16.0 / 3.0, rotateGridCount: (4, 5), animated: true)
+            self.whRatioBtn.setTitle("16 : 3", for: .normal)
+        })
+        
+        alertCtr.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
+        present(alertCtr, animated: true, completion: nil)
     }
     
-    @IBAction func firstWHRatio() {
-        croper.updateCropWHRatio(9.0 / 16.0, rotateGridCount: (6, 5), animated: true)
+    @IBAction func rotate2Right() {
+        croper.rotateRight(animated: true)
     }
     
-    @IBAction func secondWHRatio() {
-        croper.updateCropWHRatio(1, rotateGridCount: (4, 4), animated: true)
+    @IBAction func rotate2Left() {
+        croper.rotateLeft(animated: true)
+    }
+}
+
+// MARK: - 监听Slider（旋转）
+extension CropViewController {
+    @objc func beginSlider() {
+        croper.showRotateGrid(animated: true)
     }
     
-    @IBAction func thirdWHRatio() {
-        croper.updateCropWHRatio(16.0 / 9.0, rotateGridCount: (4, 5), animated: true)
+    @objc func sliding() {
+        let angle = CGFloat(slider.value)
+        croper.rotate(angle)
+    }
+    
+    @objc func endSlider() {
+        croper.hideRotateGrid(animated: true)
     }
 }
