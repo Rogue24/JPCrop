@@ -37,13 +37,14 @@ view.insertSubview(croper, at: 0)
 
 ### Rotate
 ```swift
-// The angle range is -45° ~ 45°
-croper.rotate(angle)
-
 /**
  * originAngle: Rotation origin angle.
  * There are four origins: 0°/360°, 90°, 180°, 270°
+ * The rotatable angle range of each origin angle is: -45° ~ 45°
  */
+ 
+// Rotate (Rotatable angle range: Based on the current origin angle -45° ~ 45°)
+croper.rotate(angle)
 
 // Rotate left (originAngle - 90°)
 // animated: with animation or not
