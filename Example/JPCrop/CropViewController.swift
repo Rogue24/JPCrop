@@ -118,9 +118,9 @@ extension CropViewController {
             self.whRatioBtn.setTitle("1 : 1", for: .normal)
         })
         
-        alertCtr.addAction(UIAlertAction(title: "16 : 3", style: .default) { _ in
-            self.croper.updateCropWHRatio(16.0 / 3.0, rotateGridCount: (4, 5), animated: true)
-            self.whRatioBtn.setTitle("16 : 3", for: .normal)
+        alertCtr.addAction(UIAlertAction(title: "4 : 3", style: .default) { _ in
+            self.croper.updateCropWHRatio(4.0 / 3.0, rotateGridCount: (4, 5), animated: true)
+            self.whRatioBtn.setTitle("4 : 3", for: .normal)
         })
         
         alertCtr.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
