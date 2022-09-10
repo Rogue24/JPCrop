@@ -2,7 +2,7 @@
 //  Croper.swift
 //  JPCrop_Example
 //
-//  Created by 周健平 on 2020/12/21.
+//  Created by Rogue24 on 2020/12/21.
 //
 
 import UIKit
@@ -12,7 +12,7 @@ public class Croper: UIView {
     // MARK: - 默认初始值
     
     /// 裁剪区域的边距
-    public static var margin: CGFloat = 15
+    public static var margin: UIEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 150, right: 15)
     
     /// 动画时间
     public static var animDuration: TimeInterval = 0.3
@@ -39,6 +39,9 @@ public class Croper: UIView {
     
     /// 裁剪框的frame
     public internal(set) var cropFrame: CGRect = .zero
+    
+    /// 适配 cropFrame 可裁剪的最小边距
+    public internal(set) var minMargin: UIEdgeInsets = Croper.margin
     
     /// 旋转基准角度：`0°/360°、90°、180°、270°`
     public internal(set) var originAngle: OriginAngle = .deg0
@@ -76,8 +79,6 @@ public class Croper: UIView {
     public var cropWHRatioRangeOverstep: ((_ isUpper: Bool, _ bound: CGFloat) -> ())?
     
     // MARK: - 私有属性
-    var minHorMargin: CGFloat = 0
-    var minVerMargin: CGFloat = 0
     
     let scrollView = UIScrollView()
     let imageView = UIImageView()
@@ -137,61 +138,4 @@ public class Croper: UIView {
 // MARK: - UIScrollViewDelegate
 extension Croper: UIScrollViewDelegate {
     public func viewForZooming(in scrollView: UIScrollView) -> UIView? { imageView }
-}
-
-// MARK: - 私有API
-extension Croper {
-    var isLandscapeImage: Bool {
-        imageWHRatio > 1
-    }
-    
-    func scaleValue(_ t: CGAffineTransform) -> CGFloat {
-        sqrt(t.a * t.a + t.c * t.c)
-    }
-    
-    func rotate(_ angle: CGFloat, isAutoZoom: Bool, animated: Bool) {
-        guard animated else {
-            rotate(angle, isAutoZoom: isAutoZoom)
-            return
-        }
-        UIView.animate(withDuration: Self.animDuration) {
-            self.rotate(angle, isAutoZoom: isAutoZoom)
-        }
-    }
-    
-    func rotate(_ angle: CGFloat, isAutoZoom: Bool) {
-        self.angle = angle
-        let factor = fitFactor()
-        
-        var zoomScale = scrollView.zoomScale
-        
-        if !isAutoZoom {
-            let oldScale = scaleValue(scrollView.transform)
-            let newScale = factor.scale
-            // scrollView 变大/变小多少，zoomScale 则变小/变大多少（反向缩放）
-            // 否则在旋转过程中，裁剪区域在图片上即便有足够空间进行旋转（不超出图片区域），也会跟随 scrollView 变大变小
-            zoomScale *= oldScale / newScale
-        }
-        
-        let minZoomScale = scrollView.minimumZoomScale
-        if zoomScale <= minZoomScale {
-            zoomScale = minZoomScale
-        }
-        
-        scrollView.transform = factor.transform
-        scrollView.contentInset = factor.contentInset
-        scrollView.zoomScale = zoomScale
-    }
-    
-    func updateGrid(_ idleGridAlpha: Float, _ rotateGridAlpha: Float, animated: Bool = false) {
-        if animated {
-            buildAnimation(addTo: idleGridLayer, "opacity", idleGridAlpha, 0.12, timingFunctionName: .easeIn)
-            buildAnimation(addTo: rotateGridLayer, "opacity", rotateGridAlpha, 0.12, timingFunctionName: .easeIn)
-        }
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        idleGridLayer.opacity = idleGridAlpha
-        rotateGridLayer.opacity = rotateGridAlpha
-        CATransaction.commit()
-    }
 }

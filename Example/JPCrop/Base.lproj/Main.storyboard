@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KZI-aC-v6W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="KZI-aC-v6W">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,7 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="girl.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="bL1-a9-M6s">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="girl.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="bL1-a9-M6s">
                                 <rect key="frame" x="20" y="108" width="374" height="734"/>
                             </imageView>
                         </subviews>
@@ -58,120 +58,10 @@
             </objects>
             <point key="canvasLocation" x="1011.5942028985507" y="106.47321428571428"/>
         </scene>
-        <!--Crop View Controller-->
-        <scene sceneID="ojY-Rl-3mi">
-            <objects>
-                <viewController storyboardIdentifier="CropViewController" id="d9m-Vg-mhN" customClass="CropViewController" customModule="JPCrop_Example" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="8yu-HC-lbh"/>
-                        <viewControllerLayoutGuide type="bottom" id="Ily-cY-am9"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="5cf-xE-FdH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lyz-yb-0gp">
-                                <rect key="frame" x="0.0" y="762" width="414" height="100"/>
-                                <subviews>
-                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="-45" maxValue="45" translatesAutoresizingMaskIntoConstraints="NO" id="mlL-aU-Odm">
-                                        <rect key="frame" x="18" y="50" width="378" height="31"/>
-                                    </slider>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K0f-8T-hva">
-                                        <rect key="frame" x="20" y="10" width="31" height="30"/>
-                                        <state key="normal" title="离开"/>
-                                        <connections>
-                                            <action selector="goBack" destination="d9m-Vg-mhN" eventType="touchUpInside" id="9Hu-wb-od0"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lzS-w7-t3M">
-                                        <rect key="frame" x="61" y="10" width="31" height="30"/>
-                                        <state key="normal" title="恢复"/>
-                                        <connections>
-                                            <action selector="recover" destination="d9m-Vg-mhN" eventType="touchUpInside" id="ZYD-MR-v1e"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Big-pZ-QOK">
-                                        <rect key="frame" x="102" y="10" width="31" height="30"/>
-                                        <state key="normal" title="裁剪"/>
-                                        <connections>
-                                            <action selector="crop" destination="d9m-Vg-mhN" eventType="touchUpInside" id="zIX-sw-cDo"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q2R-sU-a5c">
-                                        <rect key="frame" x="354" y="14" width="40" height="22.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="oQI-O6-cXb"/>
-                                        </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="rotate.right" catalog="system"/>
-                                        <connections>
-                                            <action selector="rotate2Right" destination="d9m-Vg-mhN" eventType="touchUpInside" id="d9y-eM-hMo"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="din-ef-mHg">
-                                        <rect key="frame" x="304" y="14" width="40" height="22.5"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="VyR-5T-qIg"/>
-                                        </constraints>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" image="rotate.left" catalog="system"/>
-                                        <connections>
-                                            <action selector="rotate2Left" destination="d9m-Vg-mhN" eventType="touchUpInside" id="VUY-KH-yRS"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NCr-wB-QDQ">
-                                        <rect key="frame" x="254" y="10" width="40" height="30"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="40" id="TFJ-0F-jVm"/>
-                                            <constraint firstAttribute="height" constant="30" id="wny-e2-n9j"/>
-                                        </constraints>
-                                        <state key="normal" title="原始"/>
-                                        <connections>
-                                            <action selector="switchWHRatio" destination="d9m-Vg-mhN" eventType="touchUpInside" id="oTO-OP-hkh"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="q2R-sU-a5c" secondAttribute="trailing" constant="20" id="4fj-9n-9VE"/>
-                                    <constraint firstItem="K0f-8T-hva" firstAttribute="leading" secondItem="lyz-yb-0gp" secondAttribute="leading" constant="20" id="81M-aj-U5Y"/>
-                                    <constraint firstItem="lzS-w7-t3M" firstAttribute="leading" secondItem="K0f-8T-hva" secondAttribute="trailing" constant="10" id="Heu-j6-k2d"/>
-                                    <constraint firstAttribute="height" constant="100" id="QV3-bG-w3X"/>
-                                    <constraint firstItem="NCr-wB-QDQ" firstAttribute="top" secondItem="lyz-yb-0gp" secondAttribute="top" constant="10" id="To3-Qt-qw1"/>
-                                    <constraint firstAttribute="trailing" secondItem="mlL-aU-Odm" secondAttribute="trailing" constant="20" id="VAH-66-tRe"/>
-                                    <constraint firstItem="Big-pZ-QOK" firstAttribute="centerY" secondItem="K0f-8T-hva" secondAttribute="centerY" id="Wkn-21-Ozs"/>
-                                    <constraint firstItem="K0f-8T-hva" firstAttribute="top" secondItem="lyz-yb-0gp" secondAttribute="top" constant="10" id="YsV-09-GDw"/>
-                                    <constraint firstItem="mlL-aU-Odm" firstAttribute="leading" secondItem="lyz-yb-0gp" secondAttribute="leading" constant="20" id="amU-qm-OUn"/>
-                                    <constraint firstItem="q2R-sU-a5c" firstAttribute="leading" secondItem="din-ef-mHg" secondAttribute="trailing" constant="10" id="cs1-XN-hsI"/>
-                                    <constraint firstItem="din-ef-mHg" firstAttribute="leading" secondItem="NCr-wB-QDQ" secondAttribute="trailing" constant="10" id="d8s-JA-LBH"/>
-                                    <constraint firstItem="lzS-w7-t3M" firstAttribute="centerY" secondItem="K0f-8T-hva" secondAttribute="centerY" id="evz-T2-LGY"/>
-                                    <constraint firstItem="NCr-wB-QDQ" firstAttribute="centerY" secondItem="din-ef-mHg" secondAttribute="centerY" id="fLg-K7-sK1"/>
-                                    <constraint firstItem="Big-pZ-QOK" firstAttribute="leading" secondItem="lzS-w7-t3M" secondAttribute="trailing" constant="10" id="l7H-Ix-maq"/>
-                                    <constraint firstAttribute="bottom" secondItem="mlL-aU-Odm" secondAttribute="bottom" constant="20" id="mU7-V9-4Oj"/>
-                                    <constraint firstItem="NCr-wB-QDQ" firstAttribute="centerY" secondItem="q2R-sU-a5c" secondAttribute="centerY" id="zp6-Fp-0eO"/>
-                                </constraints>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="lyz-yb-0gp" firstAttribute="leading" secondItem="5cf-xE-FdH" secondAttribute="leading" id="6v9-1R-Nxe"/>
-                            <constraint firstAttribute="trailing" secondItem="lyz-yb-0gp" secondAttribute="trailing" id="X5K-KF-NIw"/>
-                            <constraint firstItem="Ily-cY-am9" firstAttribute="top" secondItem="lyz-yb-0gp" secondAttribute="bottom" id="cXg-lX-ch5"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="slider" destination="mlL-aU-Odm" id="f6s-Aw-KX2"/>
-                        <outlet property="whRatioBtn" destination="NCr-wB-QDQ" id="h8y-uw-vwf"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="FOW-hh-y77" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1764" y="106"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="AIy-RR-fuc">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KZI-aC-v6W" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="KZI-aC-v6W" customClass="NavigationController" customModule="JPCrop_Example" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qb0-jU-JPu">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -190,7 +80,5 @@
     <resources>
         <image name="crop.rotate" catalog="system" width="114" height="128"/>
         <image name="girl.jpg" width="460.79998779296875" height="259.20001220703125"/>
-        <image name="rotate.left" catalog="system" width="118" height="128"/>
-        <image name="rotate.right" catalog="system" width="118" height="128"/>
     </resources>
 </document>

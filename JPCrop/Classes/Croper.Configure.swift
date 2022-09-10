@@ -8,6 +8,7 @@
 import UIKit
 
 public extension Croper {
+    typealias RotateFactor = (scale: CGFloat, transform: CGAffineTransform, contentInset: UIEdgeInsets)
     
     /// 旋转基准角度：0°/360°、90°、180°、270°
     enum OriginAngle: CGFloat {

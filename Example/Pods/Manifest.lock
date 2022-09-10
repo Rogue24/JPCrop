@@ -1,16 +1,23 @@
 PODS:
-  - JPCrop (0.2.0)
+  - JPCrop (0.2.1)
+  - pop (1.0.12)
 
 DEPENDENCIES:
   - JPCrop (from `../`)
+  - pop
+
+SPEC REPOS:
+  trunk:
+    - pop
 
 EXTERNAL SOURCES:
   JPCrop:
     :path: "../"
 
 SPEC CHECKSUMS:
-  JPCrop: 2a5742db56fa30f495683e8b51c0d7548ab04368
+  JPCrop: c88ab75620001721a8c67a8d0ea52e15d33bca16
+  pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
 
-PODFILE CHECKSUM: 2cc8719e87848e54e4d147da7166fba781e5f317
+PODFILE CHECKSUM: 30c0a152849ac73ca2bef35c74ba80dd586962b6
 
 COCOAPODS: 1.11.2

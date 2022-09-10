@@ -21,7 +21,18 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         title = "JPCrop"
+        
+        navigationController?.navigationBar.titleTextAttributes = [
+            .foregroundColor: UIColor.systemBlue,
+            .font: UIFont.systemFont(ofSize: 18.px, weight: .bold)
+        ]
+        
+        imageView.layer.shadowRadius = 8
+        imageView.layer.shadowOffset = CGSize(width: 0, height: 5)
+        imageView.layer.shadowColor = UIColor.black.cgColor
+        imageView.layer.shadowOpacity = 0.5
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,14 +42,14 @@ class ViewController: UIViewController {
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle { .darkContent }
+    
     func goCrop(_ configure: Croper.Configure) {
         guard let navCtr = navigationController else { return }
         
         let cropVC = CropViewController.build(configure) { [weak self] (image, configure) in
             guard let self = self else { return }
-            
             self.configure = configure
-            
             UIView.transition(with: self.imageView,
                               duration: 0.2,
                               options: .transitionCrossDissolve,

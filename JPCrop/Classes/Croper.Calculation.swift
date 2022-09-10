@@ -43,8 +43,8 @@ extension Croper {
     
     func fitCropFrame() -> CGRect {
         let margin = Self.margin
-        let maxW = bounds.width - margin * 2
-        let maxH = bounds.height - margin * 2
+        let maxW = bounds.width - margin.left - margin.right
+        let maxH = bounds.height - margin.top - margin.bottom
         let whRatio = cropWHRatio > 0 ? cropWHRatio : fitCropWHRatio(imageWHRatio)
         
         var w = maxW
@@ -54,8 +54,8 @@ extension Croper {
             w = h * whRatio
         }
         
-        let x = margin + (maxW - w) * 0.5
-        let y = margin + (maxH - h) * 0.5
+        let x = (maxW - w) * 0.5 + margin.left
+        let y = (maxH - h) * 0.5 + margin.top
         
         return CGRect(x: x, y: y, width: w, height: h)
     }
@@ -81,7 +81,7 @@ extension Croper {
         return CGSize(width: imageW, height: imageH)
     }
     
-    func fitFactor() -> (scale: CGFloat, transform: CGAffineTransform, contentInset: UIEdgeInsets) {
+    func fitFactor() -> RotateFactor {
         let imageW = imageBoundsSize.width
         let imageH = imageBoundsSize.height
         
@@ -120,20 +120,25 @@ extension Croper {
             }
         }
         
-        let verMargin = (cropH * scale - verSide) * 0.5 / scale + minVerMargin
-        let horMargin = (cropW * scale - horSide) * 0.5 / scale + minHorMargin
+        let verMargin = (cropH * scale - verSide) * 0.5 / scale
+        let horMargin = (cropW * scale - horSide) * 0.5 / scale
+        
+        let top = verMargin + minMargin.top
+        let left = horMargin + minMargin.left
+        let bottom = verMargin + minMargin.bottom
+        let right = horMargin + minMargin.right
         
         return (scale,
                 CGAffineTransform(rotationAngle: actualRadian).scaledBy(x: scale, y: scale),
-                UIEdgeInsets(top: verMargin, left: horMargin, bottom: verMargin, right: horMargin))
+                UIEdgeInsets(top: top, left: left, bottom: bottom, right: right))
     }
     
-    func fitOffset(_ xSclae: CGFloat, _ ySclae: CGFloat, contentSize: CGSize? = nil, contentInset: UIEdgeInsets? = nil) -> CGPoint {
+    func fitOffset(_ contentScalePoint: CGPoint, contentSize: CGSize? = nil, contentInset: UIEdgeInsets? = nil) -> CGPoint {
         let sBounds = scrollView.bounds
         let size = contentSize ?? scrollView.contentSize
         
-        var offsetX = xSclae * size.width - sBounds.width * 0.5
-        var offsetY = ySclae * size.height - sBounds.height * 0.5
+        var offsetX = contentScalePoint.x * size.width - sBounds.width * scrollView.layer.anchorPoint.x
+        var offsetY = contentScalePoint.y * size.height - sBounds.height * scrollView.layer.anchorPoint.y
         
         guard let insets = contentInset else {
             return CGPoint(x: offsetX, y: offsetY)
@@ -157,3 +162,4 @@ extension Croper {
         return CGPoint(x: offsetX, y: offsetY)
     }
 }
+

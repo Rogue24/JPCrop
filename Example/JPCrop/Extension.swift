@@ -71,6 +71,9 @@ let DiffStatusBarH: CGFloat = StatusBarH - BaseStatusBarH
 let NavBarH: CGFloat = 44.0
 let NavTopMargin: CGFloat = StatusBarH + NavBarH
 
+let BasisWScale: CGFloat = PortraitScreenWidth / 375.0
+let BasisHScale: CGFloat = (PortraitScreenHeight - DiffStatusBarH - DiffTabBarH) / 667.0
+
 extension UIImage {
     func fixOrientation() -> UIImage {
         if imageOrientation == .up { return self }
@@ -135,5 +138,68 @@ extension UIImage {
          
         guard let newImageRef = context.makeImage() else { return self }
         return UIImage(cgImage: newImageRef)
+    }
+}
+
+extension Int {
+    var px: CGFloat { CGFloat(self) * BasisWScale }
+}
+
+extension Float {
+    var px: CGFloat { CGFloat(self) * BasisWScale }
+}
+
+extension Double {
+    var px: CGFloat { CGFloat(self) * BasisWScale }
+}
+
+extension CGFloat {
+    var px: CGFloat { self * BasisWScale }
+}
+
+extension CGPoint {
+    var px: CGPoint { .init(x: self.x * BasisWScale, y: self.y * BasisWScale) }
+    
+    static func px(_ x: CGFloat, _ y: CGFloat) -> CGPoint {
+        CGPoint(x: x * BasisWScale, y: y * BasisWScale)
+    }
+}
+
+extension CGSize {
+    var px: CGSize { .init(width: self.width * BasisWScale, height: self.height * BasisWScale) }
+    
+    static func px(_ w: CGFloat, _ h: CGFloat) -> CGSize {
+        CGSize(width: w * BasisWScale, height: h * BasisWScale)
+    }
+}
+
+extension CGRect {
+    var px: CGRect { .init(x: self.origin.x * BasisWScale,
+                           y: self.origin.y * BasisWScale,
+                           width: self.width * BasisWScale,
+                           height: self.height * BasisWScale) }
+    
+    static func px(_ x: CGFloat, _ y: CGFloat, _ w: CGFloat, _ h: CGFloat) -> CGRect {
+        CGRect(x: x * BasisWScale,
+               y: y * BasisWScale,
+               width: w * BasisWScale,
+               height: h * BasisWScale)
+    }
+    
+    static func px(_ origin: CGPoint, _ size: CGSize) -> CGRect {
+        CGRect(origin: .init(x: origin.x * BasisWScale,
+                             y: origin.y * BasisWScale),
+               size: .init(width: size.width * BasisWScale,
+                           height: size.height * BasisWScale))
+    }
+}
+
+extension UIColor {
+    class var randomColor: UIColor { randomColor() }
+    class func randomColor(_ a: CGFloat = 1.0) -> UIColor {
+        UIColor(red: CGFloat.random(in: 0...255) / 255.0,
+                green: CGFloat.random(in: 0...255) / 255.0,
+                blue: CGFloat.random(in: 0...255) / 255.0,
+                alpha: a)
     }
 }
