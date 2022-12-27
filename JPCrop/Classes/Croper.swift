@@ -12,7 +12,7 @@ public class Croper: UIView {
     // MARK: - 默认初始值
     
     /// 裁剪区域的边距
-    public static var margin: UIEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 150, right: 15)
+    public static var margin: UIEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
     
     /// 动画时间
     public static var animDuration: TimeInterval = 0.3
