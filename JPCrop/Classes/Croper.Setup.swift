@@ -15,7 +15,7 @@ extension Croper {
             rotate(angle, isAutoZoom: isAutoZoom)
             return
         }
-        UIView.animate(withDuration: Self.animDuration) {
+        UIView.animate(withDuration: Self.animDuration, delay: 0, options: .curveEaseOut) {
             self.rotate(angle, isAutoZoom: isAutoZoom)
         }
     }

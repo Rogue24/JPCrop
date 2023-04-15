@@ -10,6 +10,8 @@
 		0074BEC82597818A00F0DFB3 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0074BEC72597818A00F0DFB3 /* Extension.swift */; };
 		0074BED22597848A00F0DFB3 /* CropViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0074BED12597848A00F0DFB3 /* CropViewController.swift */; };
 		1A344A052765F77F00B2CD1C /* cover_ali.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1A344A042765F77F00B2CD1C /* cover_ali.jpg */; };
+		1A6682EB29EB06AC002B0476 /* CropRatioBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6682EA29EB06AC002B0476 /* CropRatioBar.swift */; };
+		1A6682ED29EB06ED002B0476 /* Literal.Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A6682EC29EB06ED002B0476 /* Literal.Extension.swift */; };
 		1AF18FC12711A438005A4E54 /* girl.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 1AF18FC02711A438005A4E54 /* girl.jpg */; };
 		607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD51AFB9204008FA782 /* AppDelegate.swift */; };
 		607FACD81AFB9204008FA782 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACD71AFB9204008FA782 /* ViewController.swift */; };
@@ -26,6 +28,8 @@
 		0074BEC72597818A00F0DFB3 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		0074BED12597848A00F0DFB3 /* CropViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CropViewController.swift; sourceTree = "<group>"; };
 		1A344A042765F77F00B2CD1C /* cover_ali.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = cover_ali.jpg; sourceTree = "<group>"; };
+		1A6682EA29EB06AC002B0476 /* CropRatioBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropRatioBar.swift; sourceTree = "<group>"; };
+		1A6682EC29EB06ED002B0476 /* Literal.Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Literal.Extension.swift; sourceTree = "<group>"; };
 		1AF18FC02711A438005A4E54 /* girl.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = girl.jpg; sourceTree = "<group>"; };
 		279D33B6130A07E80B07C1A6 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = LICENSE; path = ../LICENSE; sourceTree = "<group>"; };
 		381748F2F2FF7D97217419B3 /* Pods-JPCrop_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JPCrop_Example.debug.xcconfig"; path = "Target Support Files/Pods-JPCrop_Example/Pods-JPCrop_Example.debug.xcconfig"; sourceTree = "<group>"; };
@@ -82,7 +86,9 @@
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
 				0074BED12597848A00F0DFB3 /* CropViewController.swift */,
 				71B7141928CB1B94000C7EF7 /* CropSlider.swift */,
+				1A6682EA29EB06AC002B0476 /* CropRatioBar.swift */,
 				0074BEC72597818A00F0DFB3 /* Extension.swift */,
+				1A6682EC29EB06ED002B0476 /* Literal.Extension.swift */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
@@ -253,7 +259,9 @@
 			files = (
 				607FACD81AFB9204008FA782 /* ViewController.swift in Sources */,
 				71B7143E28CC9BD5000C7EF7 /* NavigationController.swift in Sources */,
+				1A6682ED29EB06ED002B0476 /* Literal.Extension.swift in Sources */,
 				0074BEC82597818A00F0DFB3 /* Extension.swift in Sources */,
+				1A6682EB29EB06AC002B0476 /* CropRatioBar.swift in Sources */,
 				71B7141A28CB1B94000C7EF7 /* CropSlider.swift in Sources */,
 				0074BED22597848A00F0DFB3 /* CropViewController.swift in Sources */,
 				607FACD61AFB9204008FA782 /* AppDelegate.swift in Sources */,

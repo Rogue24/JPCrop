@@ -14,10 +14,15 @@ class CropViewController: UIViewController {
     
     private var configure: Croper.Configure!
     private var croper: Croper!
-    private var slider: CropSlider!
     private var cropDone: CropDone?
     
-    private let bgLayer = CAGradientLayer()
+    private let operationBar = UIView()
+    
+    private var slider: CropSlider!
+    private let stackView = UIStackView()
+    
+    private var ratioBar: CropRatioBar?
+    private lazy var ratio: CGSize = configure.image.size
     
     static func build(_ configure: Croper.Configure, cropDone: CropDone?) -> CropViewController {
         let cropVC = CropViewController()
@@ -50,7 +55,8 @@ private extension CropViewController {
     
     func setupOperationBar() {
         let h = 50.px + NavBarH + DiffTabBarH
-        let operationBar = UIView(frame: CGRect(x: 0, y: PortraitScreenHeight - h, width: PortraitScreenWidth, height: h))
+        
+        operationBar.frame = CGRect(x: 0, y: PortraitScreenHeight - h, width: PortraitScreenWidth, height: h)
         view.addSubview(operationBar)
         
         let blurView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
@@ -74,7 +80,6 @@ private extension CropViewController {
         operationBar.addSubview(slider)
         self.slider = slider
         
-        let stackView = UIStackView()
         stackView.backgroundColor = .clear
         stackView.frame = CGRect(x: 0, y: 50.px, width: PortraitScreenWidth, height: NavBarH)
         stackView.axis = .horizontal
@@ -95,12 +100,12 @@ private extension CropViewController {
         rotateBtn.frame.size = CGSize(width: NavBarH, height: NavBarH)
         stackView.addArrangedSubview(rotateBtn)
         
-        let whRatioBtn = UIButton(type: .system)
-        whRatioBtn.setImage(UIImage(systemName: "aspectratio"), for: .normal)
-        whRatioBtn.tintColor = .white
-        whRatioBtn.addTarget(self, action: #selector(switchWHRatio), for: .touchUpInside)
-        whRatioBtn.frame.size = CGSize(width: NavBarH, height: NavBarH)
-        stackView.addArrangedSubview(whRatioBtn)
+        let ratioBtn = UIButton(type: .system)
+        ratioBtn.setImage(UIImage(systemName: "aspectratio"), for: .normal)
+        ratioBtn.tintColor = .white
+        ratioBtn.addTarget(self, action: #selector(switchRatio), for: .touchUpInside)
+        ratioBtn.frame.size = CGSize(width: NavBarH, height: NavBarH)
+        stackView.addArrangedSubview(ratioBtn)
         
         let recoverBtn = UIButton(type: .system)
         recoverBtn.setImage(UIImage(systemName: "gobackward"), for: .normal)
@@ -135,31 +140,17 @@ private extension CropViewController {
         navigationController?.popViewController(animated: true)
     }
     
-    @objc func recover() {
-        croper.recover(animated: true)
-        slider.updateValue(0, animated: true)
-    }
-    
     @objc func rotateLeft() {
         croper.rotateLeft(animated: true)
     }
     
-    @objc func switchWHRatio() {
-        let alertCtr = UIAlertController(title: "切换裁剪宽高比", message: nil, preferredStyle: .actionSheet)
-        alertCtr.addAction(UIAlertAction(title: "原始", style: .default) { _ in
-            self.croper.updateCropWHRatio(0, rotateGridCount: (5, 5), animated: true)
-        })
-        alertCtr.addAction(UIAlertAction(title: "9 : 16", style: .default) { _ in
-            self.croper.updateCropWHRatio(9.0 / 16.0, rotateGridCount: (6, 5), animated: true)
-        })
-        alertCtr.addAction(UIAlertAction(title: "1 : 1", style: .default) { _ in
-            self.croper.updateCropWHRatio(1, rotateGridCount: (4, 4), animated: true)
-        })
-        alertCtr.addAction(UIAlertAction(title: "4 : 3", style: .default) { _ in
-            self.croper.updateCropWHRatio(4.0 / 3.0, rotateGridCount: (4, 5), animated: true)
-        })
-        alertCtr.addAction(UIAlertAction(title: "取消", style: .cancel, handler: nil))
-        present(alertCtr, animated: true, completion: nil)
+    @objc func switchRatio() {
+        showRatioBar()
+    }
+    
+    @objc func recover() {
+        croper.recover(animated: true)
+        slider.updateValue(0, animated: true)
     }
     
     @objc func crop() {
@@ -174,3 +165,55 @@ private extension CropViewController {
     }
 }
 
+extension CropViewController {
+    func showRatioBar() {
+        guard self.ratioBar == nil else { return }
+        
+        let ratioBar = CropRatioBar(imageSize: configure.image.size, ratio: ratio) { [weak self] ratio in
+            guard let self = self else { return }
+            self.ratio = ratio
+            self.croper.updateCropWHRatio(ratio.width / ratio.height, animated: true)
+        } closeHandler: { [weak self] in
+            self?.hideRatioBar()
+        }
+        ratioBar.alpha = 0
+        ratioBar.frame.origin.y = operationBar.frame.height * 0.3
+        operationBar.addSubview(ratioBar)
+        self.ratioBar = ratioBar
+        
+        let diffH = operationBar.frame.height * 0.3
+        
+        UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 1) {
+            self.slider.frame.origin.y += diffH
+            self.slider.alpha = 0
+            self.stackView.frame.origin.y += diffH
+            self.stackView.alpha = 0
+        }
+        
+        UIView.animate(withDuration: 0.45, delay: 0.1, usingSpringWithDamping: 0.9, initialSpringVelocity: 1) {
+            ratioBar.frame.origin.y = 0
+            ratioBar.alpha = 1
+        }
+    }
+    
+    func hideRatioBar() {
+        guard let ratioBar = self.ratioBar else { return }
+        self.ratioBar = nil
+        
+        let diffH = operationBar.frame.height * 0.3
+        
+        UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.9, initialSpringVelocity: 1) {
+            ratioBar.frame.origin.y = diffH
+            ratioBar.alpha = 0
+        } completion: { _ in
+            ratioBar.removeFromSuperview()
+        }
+        
+        UIView.animate(withDuration: 0.45, delay: 0.1, usingSpringWithDamping: 0.9, initialSpringVelocity: 1) {
+            self.slider.frame.origin.y -= diffH
+            self.slider.alpha = 1
+            self.stackView.frame.origin.y -= diffH
+            self.stackView.alpha = 1
+        }
+    }
+}
