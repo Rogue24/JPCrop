@@ -1,6 +1,6 @@
 use_frameworks!
 
-platform :ios, '9.0'
+platform :ios, '11.0'
 
 target 'JPCrop_Example' do
   pod 'JPCrop', :path => '../'
@@ -13,4 +13,5 @@ target 'JPCrop_Example' do
       end
     end
   end
+  
 end

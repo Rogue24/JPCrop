@@ -59,6 +59,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1A6682EE29EB1645002B0476 /* Crop */ = {
+			isa = PBXGroup;
+			children = (
+				0074BED12597848A00F0DFB3 /* CropViewController.swift */,
+				71B7141928CB1B94000C7EF7 /* CropSlider.swift */,
+				1A6682EA29EB06AC002B0476 /* CropRatioBar.swift */,
+			);
+			name = Crop;
+			sourceTree = "<group>";
+		};
+		1A6682EF29EB164D002B0476 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				0074BEC72597818A00F0DFB3 /* Extension.swift */,
+				1A6682EC29EB06ED002B0476 /* Literal.Extension.swift */,
+			);
+			name = Extension;
+			sourceTree = "<group>";
+		};
 		607FACC71AFB9204008FA782 = {
 			isa = PBXGroup;
 			children = (
@@ -84,11 +103,8 @@
 				607FACD51AFB9204008FA782 /* AppDelegate.swift */,
 				71B7143D28CC9BD5000C7EF7 /* NavigationController.swift */,
 				607FACD71AFB9204008FA782 /* ViewController.swift */,
-				0074BED12597848A00F0DFB3 /* CropViewController.swift */,
-				71B7141928CB1B94000C7EF7 /* CropSlider.swift */,
-				1A6682EA29EB06AC002B0476 /* CropRatioBar.swift */,
-				0074BEC72597818A00F0DFB3 /* Extension.swift */,
-				1A6682EC29EB06ED002B0476 /* Literal.Extension.swift */,
+				1A6682EE29EB1645002B0476 /* Crop */,
+				1A6682EF29EB164D002B0476 /* Extension */,
 				607FACD91AFB9204008FA782 /* Main.storyboard */,
 				607FACDC1AFB9204008FA782 /* Images.xcassets */,
 				607FACDE1AFB9204008FA782 /* LaunchScreen.xib */,
