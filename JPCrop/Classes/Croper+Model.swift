@@ -1,5 +1,5 @@
 //
-//  Configure.swift
+//  Croper+Model.swift
 //  JPCrop_Example
 //
 //  Created by Rogue24 on 2020/12/23.
@@ -7,7 +7,11 @@
 
 import UIKit
 
+// MARK: - 公开模型
 public extension Croper {
+    /// 网格数 - (垂直方向数量, 水平方向数量)
+    typealias GridCount = (verCount: Int, horCount: Int)
+    
     /// 旋转基准角度：0°/360°、90°、180°、270°
     enum OriginAngle: CGFloat {
         /// 以 0°/360° 为基准，可旋转范围：`-45° ~ 45°`
@@ -79,6 +83,7 @@ public extension Croper {
     }
 }
 
+// MARK: - 私有模型
 extension Croper {
     struct RotateFactor {
         let scale: CGFloat

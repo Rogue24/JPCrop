@@ -1,5 +1,5 @@
 //
-//  Calculation.swift
+//  Croper+Calculation.swift
 //  JPCrop_Example
 //
 //  Created by Rogue24 on 2020/12/26.
@@ -8,26 +8,28 @@
 import UIKit
 
 extension Croper {
+    func scaleValue(_ t: CGAffineTransform) -> CGFloat {
+        sqrt(t.a * t.a + t.c * t.c)
+    }
+    
     func fitCropWHRatio(_ cropWHRatio: CGFloat, isCallBack: Bool = false) -> CGFloat {
+        if cropWHRatio <= 0 {
+            return 0
+        }
+        
         let range = Self.cropWHRatioRange
-        
-        if cropWHRatio < range.lowerBound {
-            if isCallBack, let overstep = cropWHRatioRangeOverstep {
-                overstep(false, range.lowerBound)
-            }
-            
-            return cropWHRatio <= 0 ? 0 : range.lowerBound
+        if range.contains(cropWHRatio) {
+            return cropWHRatio
         }
         
-        if cropWHRatio > range.upperBound {
-            if isCallBack, let overstep = cropWHRatioRangeOverstep {
-                overstep(true, range.upperBound)
-            }
-            
-            return range.upperBound
+        let isUpper = cropWHRatio > range.upperBound
+        let bound = isUpper ? range.upperBound : range.lowerBound
+        
+        if isCallBack, let overstep = cropWHRatioRangeOverstep {
+            overstep(isUpper, bound)
         }
         
-        return cropWHRatio
+        return bound
     }
     
     func fitAngle(_ angle: CGFloat) -> CGFloat {
@@ -63,6 +65,7 @@ extension Croper {
     func fitImageSize() -> CGSize {
         var imageW: CGFloat
         var imageH: CGFloat
+        
         if isLandscapeImage {
             imageH = cropFrame.height
             imageW = imageH * imageWHRatio
@@ -78,6 +81,7 @@ extension Croper {
                 imageW = imageH * imageWHRatio
             }
         }
+        
         return CGSize(width: imageW, height: imageH)
     }
     
@@ -128,9 +132,10 @@ extension Croper {
         let bottom = verMargin + minMargin.bottom
         let right = horMargin + minMargin.right
         
-        return (scale,
-                CGAffineTransform(rotationAngle: actualRadian).scaledBy(x: scale, y: scale),
-                UIEdgeInsets(top: top, left: left, bottom: bottom, right: right))
+        let transform = CGAffineTransform(rotationAngle: actualRadian).scaledBy(x: scale, y: scale)
+        let contentInset = UIEdgeInsets(top: top, left: left, bottom: bottom, right: right)
+        
+        return RotateFactor(scale: scale, transform: transform, contentInset: contentInset)
     }
     
     func fitOffset(_ contentScalePoint: CGPoint, contentSize: CGSize? = nil, contentInset: UIEdgeInsets? = nil) -> CGPoint {

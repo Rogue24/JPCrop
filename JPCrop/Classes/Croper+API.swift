@@ -1,23 +1,28 @@
 //
-//  API.swift
+//  Croper+API.swift
 //  JPCrop
 //
 //  Created by Rogue24 on 2022/3/5.
 //
 
 // MARK: - 公开API
+import UIKit
 
 public extension Croper {
-    
-    // MARK: 获取同步的Configure（当前的裁剪元素、状态）
-    /// 获取同步的Configure，可用于保存当前的裁剪状态，下一次打开恢复状态
-    func syncConfigure() -> Configure {
-        Configure(image,
-                  cropWHRatio: cropWHRatio,
-                  originAngle: originAngle,
-                  angle: angle,
-                  zoomScale: scrollView.zoomScale,
-                  contentOffset: scrollView.contentOffset)
+    // MARK: 获取当前的Configure（当前的裁剪元素、状态）
+    /// 获取当前的`Configure`，可用于保存当前的裁剪状态，下一次打开恢复状态
+    func getCurrentConfigure() -> Configure {
+        var configure = Configure(image,
+                                  cropWHRatio: cropWHRatio,
+                                  originAngle: originAngle,
+                                  angle: angle)
+        
+        Self.executeInMainQueue {
+            configure.zoomScale = self.scrollView.zoomScale
+            configure.contentOffset = self.scrollView.contentOffset
+        }
+        
+        return configure
     }
     
     // MARK: 旋转
@@ -72,19 +77,20 @@ public extension Croper {
     // MARK: 显示旋转网格
     /// 显示旋转时的网格数
     func showRotateGrid(animated: Bool = false) {
-        updateGrid(0, 1, animated: animated)
+        updateGridAlpha(0, 1, animated: animated)
     }
     
     // MARK: 隐藏旋转网格
     /// 隐藏旋转时的网格数
     func hideRotateGrid(animated: Bool = false) {
-        updateGrid(1, 0, animated: animated)
+        updateGridAlpha(1, 0, animated: animated)
     }
     
     // MARK: 恢复
     /// 恢复：【调整角度 = 0】+【缩放比例 = 1】+【中心点】
     func recover(animated: Bool = false) {
         angle = 0
+        
         let factor = fitFactor()
         let updateScrollView = {
             self.scrollView.zoomScale = 1
@@ -92,6 +98,7 @@ public extension Croper {
             self.scrollView.contentInset = factor.contentInset
             self.scrollView.contentOffset = self.fitOffset(CGPoint(x: 0.5, y: 0.5), contentInset: factor.contentInset)
         }
+        
         if animated {
             UIView.animate(withDuration: Self.animDuration, delay: 0, options: .curveEaseOut, animations: updateScrollView, completion: nil)
         } else {
@@ -105,17 +112,8 @@ public extension Croper {
     ///   - compressScale: 压缩比例，默认为1，即原图尺寸
     func crop(_ compressScale: CGFloat = 1) -> UIImage? {
         guard let imageRef = image.cgImage else { return nil }
-        
-        let fromPoint = CGPoint(x: cropFrame.origin.x, y: cropFrame.maxY)
-        let convertTranslate = borderLayer.convert(fromPoint, to: imageView.layer)
-        
-        return Self.crop(compressScale,
-                         imageRef,
-                         cropWHRatio > 0 ? cropWHRatio : fitCropWHRatio(imageWHRatio),
-                         scaleValue(scrollView.transform) * scrollView.zoomScale,
-                         convertTranslate,
-                         actualRadian,
-                         imageView.bounds.height)
+        let factor = getCropFactorSafely()
+        return Self.crop(compressScale, imageRef, factor)
     }
     
     // MARK: 异步裁剪
@@ -124,26 +122,14 @@ public extension Croper {
     ///   - compressScale: 压缩比例，默认为1，即原图尺寸
     func asyncCrop(_ compressScale: CGFloat = 1, _ cropDone: @escaping (UIImage?) -> ()) {
         guard let imageRef = image.cgImage else {
-            DispatchQueue.main.async { cropDone(nil) }
+            Self.executeInMainQueue(isAsync: true) { cropDone(nil) }
             return
         }
         
-        let cropWHRatio = self.cropWHRatio > 0 ? self.cropWHRatio : fitCropWHRatio(imageWHRatio)
-        let scale = scaleValue(scrollView.transform) * scrollView.zoomScale
-        let convertTranslate = borderLayer.convert(CGPoint(x: cropFrame.origin.x, y: cropFrame.maxY), to: imageView.layer)
-        let radian = actualRadian
-        let height = imageView.bounds.height
-        
+        let factor = getCropFactorSafely()
         DispatchQueue.global().async {
-            let result = Self.crop(compressScale,
-                                   imageRef,
-                                   cropWHRatio,
-                                   scale,
-                                   convertTranslate,
-                                   radian,
-                                   height)
+            let result = Self.crop(compressScale, imageRef, factor)
             DispatchQueue.main.async { cropDone(result) }
         }
     }
-    
 }

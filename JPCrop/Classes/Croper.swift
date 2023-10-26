@@ -8,8 +8,7 @@
 import UIKit
 
 public class Croper: UIView {
-    
-    // MARK: - 默认初始值
+    // MARK: - 静态默认初始值（可修改）
     
     /// 裁剪区域的边距
     public static var margin: UIEdgeInsets = UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15)
@@ -31,6 +30,9 @@ public class Croper: UIView {
     /// 图片的宽高比（当`cropWHRatio = 0`时取该值）
     public let imageWHRatio: CGFloat
     
+    /// 是否为横幅图片
+    public var isLandscapeImage: Bool { imageWHRatio > 1 }
+    
     /// 图片视图基于并适配`cropFrame`的`size`
     public internal(set) var imageBoundsSize: CGSize = .zero
     
@@ -40,7 +42,7 @@ public class Croper: UIView {
     /// 裁剪框的frame
     public internal(set) var cropFrame: CGRect = .zero
     
-    /// 适配 cropFrame 可裁剪的最小边距
+    /// 适配`cropFrame`可裁剪的最小边距
     public internal(set) var minMargin: UIEdgeInsets = Croper.margin
     
     /// 旋转基准角度：`0°/360°、90°、180°、270°`
@@ -66,9 +68,6 @@ public class Croper: UIView {
     /// 当前调整的旋转弧度（基于`originAngle`，范围：`-π/4` ~ `π/4`）
     public var radian: CGFloat { (angle / 180.0) * CGFloat.pi }
     
-    /// 类型：网格数 - (垂直方向数量, 水平方向数量)
-    public typealias GridCount = (verCount: Int, horCount: Int)
-    
     /// 闲置时的网格数
     public var idleGridCount: GridCount = (0, 0)
     
@@ -79,7 +78,6 @@ public class Croper: UIView {
     public var cropWHRatioRangeOverstep: ((_ isUpper: Bool, _ bound: CGFloat) -> ())?
     
     // MARK: - 私有属性
-    
     let scrollView = UIScrollView()
     let imageView = UIImageView()
     let shadeLayer = CAShapeLayer()
@@ -89,7 +87,7 @@ public class Croper: UIView {
     
     // MARK: - 构造器
     public convenience init(frame: CGRect,
-                            _ configure: Configure,
+                            configure: Configure,
                             idleGridCount: GridCount = (3, 3),
                             rotateGridCount: GridCount = (5, 5)) {
         self.init(frame: frame,
@@ -112,19 +110,22 @@ public class Croper: UIView {
                 _ contentOffset: CGPoint? = nil,
                 _ idleGridCount: GridCount? = nil,
                 _ rotateGridCount: GridCount? = nil) {
-        
         self.image = image
         self.imageWHRatio = image.size.width / image.size.height
         self.originAngle = originAngle
-        
         super.init(frame: frame)
         
         setupUI()
         updateCropWHRatio(cropWHRatio, idleGridCount: idleGridCount, rotateGridCount: rotateGridCount)
         rotate(angle)
         
-        if let scale = zoomScale { scrollView.zoomScale = scale }
-        if let offset = contentOffset { scrollView.contentOffset = offset }
+        if let scale = zoomScale {
+            scrollView.zoomScale = scale
+        }
+        
+        if let offset = contentOffset {
+            scrollView.contentOffset = offset
+        }
     }
     
     required public init?(coder: NSCoder) {
@@ -132,10 +133,14 @@ public class Croper: UIView {
     }
     
     // MARK: - Override
-    public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? { scrollView }
+    public override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        scrollView
+    }
 }
 
-// MARK: - UIScrollViewDelegate
+// MARK: - <UIScrollViewDelegate>
 extension Croper: UIScrollViewDelegate {
-    public func viewForZooming(in scrollView: UIScrollView) -> UIView? { imageView }
+    public func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        imageView
+    }
 }

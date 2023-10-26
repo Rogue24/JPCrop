@@ -1,5 +1,5 @@
 //
-//  Builder.swift
+//  Croper+UI.swift
 //  JPCrop_Example
 //
 //  Created by Rogue24 on 2020/12/23.
@@ -8,13 +8,14 @@
 import UIKit
 
 extension Croper {
+    /// 初始化UI
     func setupUI() {
         clipsToBounds = true
         backgroundColor = .black
         
         scrollView.delegate = self
         scrollView.clipsToBounds = false
-        if #available(iOS 11.0, *) { scrollView.contentInsetAdjustmentBehavior = .never }
+        scrollView.contentInsetAdjustmentBehavior = .never
         scrollView.minimumZoomScale = 1
         scrollView.maximumZoomScale = 10
         scrollView.bounces = true
@@ -55,15 +56,128 @@ extension Croper {
         layer.addSublayer(borderLayer)
     }
     
-    
-    func buildAnimation<T>(addTo layer: CALayer, _ keyPath: String, _ toValue: T, _ duration: TimeInterval, timingFunctionName: CAMediaTimingFunctionName = .easeOut) {
-        let anim = CABasicAnimation(keyPath: keyPath)
-        anim.fromValue = layer.value(forKeyPath: keyPath)
-        anim.toValue = toValue
-        anim.fillMode = .backwards
-        anim.duration = duration
-        anim.timingFunction = CAMediaTimingFunction(name: timingFunctionName)
-        layer.add(anim, forKey: keyPath)
+    /// 刷新UI，适配当前窗口
+    func updateUI(withRotateFactor factor: RotateFactor,
+                  contentScalePoint: CGPoint,
+                  zoomScale: CGFloat,
+                  idleGridCount: GridCount?,
+                  rotateGridCount: GridCount?,
+                  animated: Bool) {
+        let updateScrollView = {
+            if zoomScale < 1 {
+                self.scrollView.minimumZoomScale = 1
+                self.scrollView.zoomScale = 1
+            }
+            self.scrollView.contentInset = factor.contentInset
+            self.scrollView.contentOffset = self.fitOffset(contentScalePoint, contentInset: factor.contentInset)
+        }
+        
+        // 边框路径
+        let borderPath = UIBezierPath(rect: cropFrame)
+        // 阴影路径
+        let shadePath = UIBezierPath(rect: bounds)
+        shadePath.append(borderPath)
+        // 闲置网格路径
+        if let obIdleGridCount = idleGridCount { self.idleGridCount = obIdleGridCount }
+        let idleGridPath = buildGridPath(with: self.idleGridCount)
+        // 旋转网格路径
+        if let obRotateGridCount = rotateGridCount { self.rotateGridCount = obRotateGridCount }
+        let rotateGridPath = buildGridPath(with: self.rotateGridCount)
+        
+        if animated {
+            UIView.animate(withDuration: Self.animDuration, delay: 0, options: .curveEaseOut, animations: updateScrollView, completion: nil)
+            Self.addAnimation(to: borderLayer, "path", borderPath.cgPath)
+            Self.addAnimation(to: shadeLayer, "path", shadePath.cgPath)
+            Self.addAnimation(to: idleGridLayer, "path", idleGridPath.cgPath)
+            Self.addAnimation(to: rotateGridLayer, "path", rotateGridPath.cgPath)
+        } else {
+            updateScrollView()
+        }
+        
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        borderLayer.path = borderPath.cgPath
+        shadeLayer.path = shadePath.cgPath
+        idleGridLayer.path = idleGridPath.cgPath
+        rotateGridLayer.path = rotateGridPath.cgPath
+        CATransaction.commit()
     }
 }
 
+extension Croper {
+    func rotate(_ angle: CGFloat, isAutoZoom: Bool, animated: Bool) {
+        guard animated else {
+            rotate(angle, isAutoZoom: isAutoZoom)
+            return
+        }
+        
+        UIView.animate(withDuration: Self.animDuration, delay: 0, options: .curveEaseOut) {
+            self.rotate(angle, isAutoZoom: isAutoZoom)
+        }
+    }
+    
+    func rotate(_ angle: CGFloat, isAutoZoom: Bool) {
+        self.angle = angle
+        let factor = fitFactor()
+        
+        var zoomScale = scrollView.zoomScale
+        
+        if !isAutoZoom {
+            let oldScale = scaleValue(scrollView.transform)
+            let newScale = factor.scale
+            // scrollView 变大/变小多少，zoomScale 则变小/变大多少（反向缩放）
+            // 否则在旋转过程中，裁剪区域在图片上即便有足够空间进行旋转（不超出图片区域），也会跟随 scrollView 变大变小
+            zoomScale *= oldScale / newScale
+        }
+        
+        let minZoomScale = scrollView.minimumZoomScale
+        if zoomScale <= minZoomScale {
+            zoomScale = minZoomScale
+        }
+        
+        scrollView.transform = factor.transform
+        scrollView.contentInset = factor.contentInset
+        scrollView.zoomScale = zoomScale
+    }
+}
+
+extension Croper {
+    func buildGridPath(with gridCount: (verCount: Int, horCount: Int)) -> UIBezierPath {
+        let gridPath = UIBezierPath()
+        guard gridCount.verCount > 1, gridCount.horCount > 1 else { return gridPath }
+        
+        let verSpace = cropFrame.height / CGFloat(gridCount.verCount)
+        let horSpace = cropFrame.width / CGFloat(gridCount.horCount)
+        
+        for i in 1 ..< gridCount.verCount {
+            let px = cropFrame.origin.x
+            let py = cropFrame.origin.y + verSpace * CGFloat(i)
+            gridPath.move(to: CGPoint(x: px, y: py))
+            gridPath.addLine(to: CGPoint(x: px + cropFrame.width, y: py))
+        }
+        
+        for i in 1 ..< gridCount.horCount {
+            let px = cropFrame.origin.x + horSpace * CGFloat(i)
+            let py = cropFrame.origin.y
+            gridPath.move(to: CGPoint(x: px, y: py))
+            gridPath.addLine(to: CGPoint(x: px, y: py + cropFrame.height))
+        }
+        
+        return gridPath
+    }
+    
+    func updateGridAlpha(_ idleGridAlpha: Float,
+                         _ rotateGridAlpha: Float,
+                         animated: Bool = false) {
+        if animated {
+            Self.addAnimation(to: idleGridLayer, "opacity", idleGridAlpha, duration: 0.12, curve: .easeIn)
+            Self.addAnimation(to: rotateGridLayer, "opacity", rotateGridAlpha, duration: 0.12, curve: .easeIn)
+        }
+        
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        idleGridLayer.opacity = idleGridAlpha
+        rotateGridLayer.opacity = rotateGridAlpha
+        CATransaction.commit()
+    }
+}
