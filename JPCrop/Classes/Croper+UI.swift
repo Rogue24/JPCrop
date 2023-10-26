@@ -55,25 +55,6 @@ extension Croper {
         layer.addSublayer(borderLayer)
     }
     
-    func buildGridPath(_ gridCount: (verCount: Int, horCount: Int)) -> UIBezierPath {
-        let gridPath = UIBezierPath()
-        guard gridCount.verCount > 1, gridCount.horCount > 1 else { return gridPath }
-        let verSpace = cropFrame.height / CGFloat(gridCount.verCount)
-        let horSpace = cropFrame.width / CGFloat(gridCount.horCount)
-        for i in 1 ..< gridCount.verCount {
-            let px = cropFrame.origin.x
-            let py = cropFrame.origin.y + verSpace * CGFloat(i)
-            gridPath.move(to: CGPoint(x: px, y: py))
-            gridPath.addLine(to: CGPoint(x: px + cropFrame.width, y: py))
-        }
-        for i in 1 ..< gridCount.horCount {
-            let px = cropFrame.origin.x + horSpace * CGFloat(i)
-            let py = cropFrame.origin.y
-            gridPath.move(to: CGPoint(x: px, y: py))
-            gridPath.addLine(to: CGPoint(x: px, y: py + cropFrame.height))
-        }
-        return gridPath
-    }
     
     func buildAnimation<T>(addTo layer: CALayer, _ keyPath: String, _ toValue: T, _ duration: TimeInterval, timingFunctionName: CAMediaTimingFunctionName = .easeOut) {
         let anim = CABasicAnimation(keyPath: keyPath)

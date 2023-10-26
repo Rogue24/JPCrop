@@ -5,16 +5,23 @@
 //  Created by Rogue24 on 2022/3/5.
 //
 
+import UIKit
+
 extension Croper {
-    var isLandscapeImage: Bool { imageWHRatio > 1 }
+    var isLandscapeImage: Bool {
+        imageWHRatio > 1
+    }
     
-    func scaleValue(_ t: CGAffineTransform) -> CGFloat { sqrt(t.a * t.a + t.c * t.c) }
+    func scaleValue(_ t: CGAffineTransform) -> CGFloat {
+        sqrt(t.a * t.a + t.c * t.c)
+    }
     
     func rotate(_ angle: CGFloat, isAutoZoom: Bool, animated: Bool) {
         guard animated else {
             rotate(angle, isAutoZoom: isAutoZoom)
             return
         }
+        
         UIView.animate(withDuration: Self.animDuration, delay: 0, options: .curveEaseOut) {
             self.rotate(angle, isAutoZoom: isAutoZoom)
         }
@@ -45,10 +52,12 @@ extension Croper {
     }
     
     func updateGrid(_ idleGridAlpha: Float, _ rotateGridAlpha: Float, animated: Bool = false) {
+        
         if animated {
             buildAnimation(addTo: idleGridLayer, "opacity", idleGridAlpha, 0.12, timingFunctionName: .easeIn)
             buildAnimation(addTo: rotateGridLayer, "opacity", rotateGridAlpha, 0.12, timingFunctionName: .easeIn)
         }
+        
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         idleGridLayer.opacity = idleGridAlpha
@@ -59,12 +68,7 @@ extension Croper {
 
 extension Croper {
     /// 更新裁剪宽高比，并获取改变前后的差值
-    func resetCropWHRatio(_ whRatio: CGFloat) -> (
-        factor: RotateFactor,
-        contentScalePoint: CGPoint,
-        zoomScale: CGFloat,
-        imageFrameSize: CGSize
-    ) {
+    func resetCropWHRatio(_ whRatio: CGFloat) -> DiffFactor {
         cropWHRatio = fitCropWHRatio(whRatio, isCallBack: true)
         
         // 更新可裁剪区域
@@ -99,7 +103,10 @@ extension Croper {
         let imageFrameSize = CGSize(width: imageBoundsSize.width * zoomScale,
                                     height: imageBoundsSize.height * zoomScale)
         
-        return (factor, contentScalePoint, zoomScale, imageFrameSize)
+        return .init(factor: factor,
+                     contentScalePoint: contentScalePoint,
+                     zoomScale: zoomScale,
+                     imageFrameSize: imageFrameSize)
     }
     
     /// 无痕刷新 scrollView 改变后的 transform 和其他差值（让 scrollView 形变后相对于之前的 UI 状态“看上去”没有变化一样）
@@ -169,69 +176,5 @@ extension Croper {
         idleGridLayer.path = idleGridPath.cgPath
         rotateGridLayer.path = rotateGridPath.cgPath
         CATransaction.commit()
-    }
-}
-
-extension Croper {
-    static func crop(_ compressScale: CGFloat,
-                     _ imageRef: CGImage,
-                     _ cropWHRatio: CGFloat,
-                     _ scale: CGFloat,
-                     _ convertTranslate: CGPoint,
-                     _ radian: CGFloat,
-                     _ imageBoundsHeight: CGFloat) -> UIImage? {
-        
-        let width = CGFloat(imageRef.width) * compressScale
-        let height = CGFloat(imageRef.height) * compressScale
-        
-        // 获取裁剪尺寸和裁剪区域
-        var rendSize: CGSize
-        if width > height {
-            rendSize = CGSize(width: height * cropWHRatio, height: height)
-            if rendSize.width > width {
-                rendSize = CGSize(width: width, height: width / cropWHRatio)
-            }
-        } else {
-            rendSize = CGSize(width: width, height: width / cropWHRatio)
-            if rendSize.height > height {
-                rendSize = CGSize(width: height * cropWHRatio, height: height)
-            }
-        }
-        
-        var bitmapRawValue = CGBitmapInfo.byteOrder32Little.rawValue
-        let alphaInfo = imageRef.alphaInfo
-        if alphaInfo == .premultipliedLast ||
-            alphaInfo == .premultipliedFirst ||
-            alphaInfo == .last ||
-            alphaInfo == .first {
-            bitmapRawValue += CGImageAlphaInfo.premultipliedFirst.rawValue
-        } else {
-            bitmapRawValue += CGImageAlphaInfo.noneSkipFirst.rawValue
-        }
-        
-        guard let context = CGContext(data: nil,
-                                      width: Int(rendSize.width),
-                                      height: Int(rendSize.height),
-                                      bitsPerComponent: 8,
-                                      bytesPerRow: 0,
-                                      space: CGColorSpaceCreateDeviceRGB(),
-                                      bitmapInfo: bitmapRawValue) else { return nil }
-        context.setShouldAntialias(true)
-        context.setAllowsAntialiasing(true)
-        context.interpolationQuality = .high
-        
-        let iScale = CGFloat(imageRef.height) / (imageBoundsHeight * scale)
-        var translate = convertTranslate
-        translate.y = imageBoundsHeight - translate.y // 左下点与底部的距离
-        translate.x *= -1 * scale * iScale
-        translate.y *= -1 * scale * iScale
-        
-        let transform = CGAffineTransform(scaleX: scale, y: scale).rotated(by: -radian).translatedBy(x: translate.x, y: translate.y)
-        context.concatenate(transform)
-        
-        context.draw(imageRef, in: CGRect(origin: .zero, size: CGSize(width: width, height: height)))
-        
-        guard let newImageRef = context.makeImage() else { return nil }
-        return UIImage(cgImage: newImageRef)
     }
 }

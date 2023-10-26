@@ -8,8 +8,6 @@
 import UIKit
 
 public extension Croper {
-    typealias RotateFactor = (scale: CGFloat, transform: CGAffineTransform, contentInset: UIEdgeInsets)
-    
     /// 旋转基准角度：0°/360°、90°、180°、270°
     enum OriginAngle: CGFloat {
         /// 以 0°/360° 为基准，可旋转范围：`-45° ~ 45°`
@@ -45,6 +43,7 @@ public extension Croper {
         }
     }
     
+    /// 初始化配置
     struct Configure {
         /// 裁剪图片
         public let image: UIImage
@@ -77,5 +76,28 @@ public extension Croper {
             self.zoomScale = zoomScale
             self.contentOffset = contentOffset
         }
+    }
+}
+
+extension Croper {
+    struct RotateFactor {
+        let scale: CGFloat
+        let transform: CGAffineTransform
+        let contentInset: UIEdgeInsets
+    }
+    
+    struct DiffFactor {
+        let factor: RotateFactor
+        let contentScalePoint: CGPoint
+        let zoomScale: CGFloat
+        let imageFrameSize: CGSize
+    }
+    
+    struct CropFactor {
+        let cropWHRatio: CGFloat
+        let scale: CGFloat
+        let convertTranslate: CGPoint
+        let radian: CGFloat
+        let imageBoundsHeight: CGFloat
     }
 }

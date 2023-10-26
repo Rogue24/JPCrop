@@ -127,7 +127,7 @@ private extension CropViewController {
                                      left: 15.px,
                                      bottom: 50.px + NavBarH + DiffTabBarH + 15.px,
                                      right: 15.px)
-        let croper = Croper(frame: PortraitScreenBounds, configure)
+        let croper = Croper(frame: PortraitScreenBounds, configure: configure)
         croper.clipsToBounds = false
         view.insertSubview(croper, at: 0)
         self.croper = croper
@@ -157,10 +157,17 @@ private extension CropViewController {
         navigationController?.popViewController(animated: true)
         
         guard let cropDone = self.cropDone else { return }
-        let configure = croper.syncConfigure()
-        croper.asyncCrop {
-            guard let image = $0 else { return }
-            cropDone(image, configure)
+        
+        DispatchQueue.global().async {
+            guard let image = self.croper.crop() else {
+                JPrint("裁剪失败！")
+                return
+            }
+            
+            let configure = self.croper.getCurrentConfigure()
+            DispatchQueue.main.async {
+                cropDone(image, configure)
+            }
         }
     }
 }

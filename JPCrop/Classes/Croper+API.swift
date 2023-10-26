@@ -124,7 +124,7 @@ public extension Croper {
     ///   - compressScale: 压缩比例，默认为1，即原图尺寸
     func asyncCrop(_ compressScale: CGFloat = 1, _ cropDone: @escaping (UIImage?) -> ()) {
         guard let imageRef = image.cgImage else {
-            cropDone(nil)
+            DispatchQueue.main.async { cropDone(nil) }
             return
         }
         
