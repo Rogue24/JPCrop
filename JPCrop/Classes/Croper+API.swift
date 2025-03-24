@@ -111,7 +111,7 @@ public extension Croper {
     /// - Parameters:
     ///   - compressScale: 压缩比例，默认为1，即原图尺寸
     func crop(_ compressScale: CGFloat = 1) -> UIImage? {
-        guard let imageRef = image.cgImage else { return nil }
+        guard let imageRef = image.normalizedImage().cgImage else { return nil }
         let factor = getCropFactorSafely()
         return Self.crop(compressScale, imageRef, factor)
     }
@@ -121,7 +121,7 @@ public extension Croper {
     /// - Parameters:
     ///   - compressScale: 压缩比例，默认为1，即原图尺寸
     func asyncCrop(_ compressScale: CGFloat = 1, _ cropDone: @escaping (UIImage?) -> ()) {
-        guard let imageRef = image.cgImage else {
+        guard let imageRef = image.normalizedImage().cgImage else {
             Self.executeInMainQueue(isAsync: true) { cropDone(nil) }
             return
         }
@@ -131,5 +131,21 @@ public extension Croper {
             let result = Self.crop(compressScale, imageRef, factor)
             DispatchQueue.main.async { cropDone(result) }
         }
+    }
+}
+
+/// 扩展方法：校正图像方向
+/// 此扩展用于修复裁剪相机竖向拍摄的照片时，裁剪后的图像会逆时针旋转 90 度的 Bug。
+/// 原理：
+/// Core Graphics 的坐标系原点在 左下角，而 UIKit（UIImage）的坐标系原点在 左上角。
+/// 如果原图的 EXIF 方向信息（如 UIImage.imageOrientation）未正确处理，直接使用 CGImage 绘制时，系统可能自动应用方向补偿，导致意外旋转。
+extension UIImage {
+    func normalizedImage() -> UIImage {
+        if imageOrientation == .up { return self }
+        UIGraphicsBeginImageContextWithOptions(size, false, scale)
+        draw(in: CGRect(origin: .zero, size: size))
+        let normalizedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return normalizedImage ?? self
     }
 }
