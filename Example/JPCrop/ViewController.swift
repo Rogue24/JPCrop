@@ -116,11 +116,7 @@ extension ViewController {
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true) { [weak self] in
-            guard let self = self,
-                  var image = info[.originalImage] as? UIImage else { return }
-            // 需要修正一下方向
-            image = image.fixOrientation()
-            
+            guard let self, let image = info[.originalImage] as? UIImage else { return }
             let configure = Croper.Configure(image)
             self.goCrop(configure)
         }

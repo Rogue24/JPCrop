@@ -12,42 +12,40 @@ extension Croper {
     func getFixedImageRef() -> CGImage? {
         let orientation = image.imageOrientation
         let imageRef = image.cgImage
-        guard orientation != .up, let imageRef else {
-            return imageRef
-        }
-         
+        guard orientation != .up, let imageRef else { return imageRef }
+        
         var transform = CGAffineTransform.identity
-         
+        
         switch orientation {
         case .down, .downMirrored:
             transform = transform.translatedBy(x: image.size.width, y: image.size.height)
             transform = transform.rotated(by: .pi)
-             
+            
         case .left, .leftMirrored:
             transform = transform.translatedBy(x: image.size.width, y: 0)
             transform = transform.rotated(by: .pi / 2)
-             
+            
         case .right, .rightMirrored:
             transform = transform.translatedBy(x: 0, y: image.size.height)
             transform = transform.rotated(by: -.pi / 2)
-             
+            
         default:
             break
         }
-         
+        
         switch orientation {
         case .upMirrored, .downMirrored:
             transform = transform.translatedBy(x: image.size.width, y: 0)
             transform = transform.scaledBy(x: -1, y: 1)
-             
+            
         case .leftMirrored, .rightMirrored:
             transform = transform.translatedBy(x: image.size.height, y: 0)
             transform = transform.scaledBy(x: -1, y: 1)
-             
+            
         default:
             break
         }
-         
+        
         guard let context = CGContext(data: nil,
                                       width: Int(image.size.width),
                                       height: Int(image.size.height),
@@ -68,6 +66,7 @@ extension Croper {
         
         context.concatenate(transform)
         context.draw(imageRef, in: drawRect)
+        
         return context.makeImage() ?? imageRef
     }
     
