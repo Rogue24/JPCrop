@@ -8,6 +8,70 @@
 import UIKit
 
 extension Croper {
+    /// 获取修正方向后的图片
+    func getFixedImageRef() -> CGImage? {
+        let orientation = image.imageOrientation
+        let imageRef = image.cgImage
+        guard orientation != .up, let imageRef else {
+            return imageRef
+        }
+         
+        var transform = CGAffineTransform.identity
+         
+        switch orientation {
+        case .down, .downMirrored:
+            transform = transform.translatedBy(x: image.size.width, y: image.size.height)
+            transform = transform.rotated(by: .pi)
+             
+        case .left, .leftMirrored:
+            transform = transform.translatedBy(x: image.size.width, y: 0)
+            transform = transform.rotated(by: .pi / 2)
+             
+        case .right, .rightMirrored:
+            transform = transform.translatedBy(x: 0, y: image.size.height)
+            transform = transform.rotated(by: -.pi / 2)
+             
+        default:
+            break
+        }
+         
+        switch orientation {
+        case .upMirrored, .downMirrored:
+            transform = transform.translatedBy(x: image.size.width, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
+             
+        case .leftMirrored, .rightMirrored:
+            transform = transform.translatedBy(x: image.size.height, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
+             
+        default:
+            break
+        }
+         
+        guard let context = CGContext(data: nil,
+                                      width: Int(image.size.width),
+                                      height: Int(image.size.height),
+                                      bitsPerComponent: imageRef.bitsPerComponent,
+                                      bytesPerRow: 0,
+                                      space: imageRef.colorSpace ?? CGColorSpaceCreateDeviceRGB(),
+                                      bitmapInfo: imageRef.bitmapInfo.rawValue) else {
+            return imageRef
+        }
+        
+        let drawRect: CGRect
+        switch orientation {
+        case .left, .leftMirrored, .right, .rightMirrored:
+            drawRect =  CGRect(x: 0, y: 0, width: image.size.height, height: image.size.width)
+        default:
+            drawRect = CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height)
+        }
+        
+        context.concatenate(transform)
+        context.draw(imageRef, in: drawRect)
+        return context.makeImage() ?? imageRef
+    }
+    
+    /// 获取裁剪参数
     func getCropFactorSafely() -> CropFactor {
         var ratio: CGFloat = 0
         var scale: CGFloat = 0
@@ -28,71 +92,5 @@ extension Croper {
                           convertTranslate: translate,
                           radian: radian,
                           imageBoundsHeight: height)
-    }
-    
-    static func crop(_ compressScale: CGFloat,
-                     _ imageRef: CGImage,
-                     _ factor: CropFactor) -> UIImage? {
-        let width = CGFloat(imageRef.width) * compressScale
-        let height = CGFloat(imageRef.height) * compressScale
-        
-        // 获取裁剪尺寸和裁剪区域
-        let cropWHRatio = factor.cropWHRatio
-        var rendSize: CGSize
-        if width > height {
-            rendSize = CGSize(width: height * cropWHRatio, height: height)
-            if rendSize.width > width {
-                rendSize = CGSize(width: width, height: width / cropWHRatio)
-            }
-        } else {
-            rendSize = CGSize(width: width, height: width / cropWHRatio)
-            if rendSize.height > height {
-                rendSize = CGSize(width: height * cropWHRatio, height: height)
-            }
-        }
-        
-        var bitmapRawValue = CGBitmapInfo.byteOrder32Little.rawValue
-        let alphaInfo = imageRef.alphaInfo
-        if alphaInfo == .premultipliedLast ||
-            alphaInfo == .premultipliedFirst ||
-            alphaInfo == .last ||
-            alphaInfo == .first {
-            bitmapRawValue += CGImageAlphaInfo.premultipliedFirst.rawValue
-        } else {
-            bitmapRawValue += CGImageAlphaInfo.noneSkipFirst.rawValue
-        }
-        
-        guard let context = CGContext(data: nil,
-                                      width: Int(rendSize.width),
-                                      height: Int(rendSize.height),
-                                      bitsPerComponent: 8,
-                                      bytesPerRow: 0,
-                                      space: CGColorSpaceCreateDeviceRGB(),
-                                      bitmapInfo: bitmapRawValue) else { return nil }
-        
-        let scale = factor.scale
-        let radian = factor.radian
-        
-        let ibHeight = factor.imageBoundsHeight
-        let iScale = CGFloat(imageRef.height) / (ibHeight * scale)
-        var translate = factor.convertTranslate
-        translate.y = ibHeight - translate.y // 左下点与底部的距离
-        translate.x *= -1 * scale * iScale
-        translate.y *= -1 * scale * iScale
-        
-        var transform = CGAffineTransform(scaleX: scale, y: scale)
-        transform = transform.rotated(by: -radian)
-        transform = transform.translatedBy(x: translate.x, y: translate.y)
-        
-        context.setShouldAntialias(true)
-        context.setAllowsAntialiasing(true)
-        context.interpolationQuality = .high
-        // 旋转+缩放+位移
-        context.concatenate(transform)
-        // 绘制
-        context.draw(imageRef, in: CGRect(x: 0, y: 0, width: width, height: height))
-        
-        guard let newImageRef = context.makeImage() else { return nil }
-        return UIImage(cgImage: newImageRef)
     }
 }
